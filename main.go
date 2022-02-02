@@ -49,10 +49,6 @@ func main() {
 
 	groupWait(
 		func() {
-			cron.StopCron(ctx)
-			log.GetLogger().Info("cron stopped")
-		},
-		func() {
 			_ = log.GetLogger().Sync()
 		},
 		func() {
@@ -60,8 +56,15 @@ func main() {
 			log.GetLogger().Info("sentry flushed")
 		},
 		func() {
+			cron.HandlePendingTransaction()
+			log.GetLogger().Info("pending transaction handled")
+
 			_ = model.CloseDb()
 			log.GetLogger().Info("db connection closed")
+		},
+		func() {
+			cron.StopCron(ctx)
+			log.GetLogger().Info("cron stopped")
 		},
 	)
 
@@ -87,11 +90,5 @@ func start() {
 	}
 
 	// sync projects
-	syncErr := model.SyncAllProjects()
-	if syncErr != nil {
-		log.GetLogger().Error("sync projects failed.", zap.String("error", syncErr.Error()))
-	}
-
-	time.Sleep(1*time.Second)
-	cron.GetEthTransaction()
+	cron.GetEnableProject()
 }

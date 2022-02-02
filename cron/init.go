@@ -10,8 +10,11 @@ var cronClient *cron.Cron
 func InitCron() {
 	cronClient = cron.New(cron.WithSeconds())
 
-	// migrate transaction
-	// _, _ = cronClient.AddFunc("5,35 * * * * *", xchRechargeCheckHandler)
+	// add job
+	_, _ = cronClient.AddFunc("0 * * * * *", GetEnableProject)
+	_, _ = cronClient.AddFunc("10 * * * * *", GetEthTransaction)
+	_, _ = cronClient.AddFunc("20,50 * * * * *", SendMappingTransaction)
+	_, _ = cronClient.AddFunc("30 * * * * *", CheckMappingTransaction)
 
 	cronClient.Start()
 }

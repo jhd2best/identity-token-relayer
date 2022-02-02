@@ -1,7 +1,9 @@
 package model
 
 import (
+	"cloud.google.com/go/firestore"
 	"context"
+	"errors"
 	"go.uber.org/zap"
 	"google.golang.org/api/iterator"
 	"identity-token-relayer/log"
@@ -15,6 +17,7 @@ type Project struct {
 	BaseURI          string `firestore:"base_uri"`
 	Status           string `firestore:"status"` // created, initialed
 	LastUpdateHeight int64  `firestore:"last_update_height"`
+	Enable           bool   `firestore:"enable"`
 }
 
 var (
@@ -25,10 +28,10 @@ func GetAllProjects() map[string]Project {
 	return projects
 }
 
-func SyncAllProjects() error {
+func SyncAllEnableProjects() error {
 	ctx := context.Background()
 	newProjects := make(map[string]Project, 0)
-	iter := getDbClient().Collection("projects").Documents(ctx)
+	iter := GetDbClient().Collection("projects").Where("enable", "==", true).Documents(ctx)
 	for {
 		if doc, iterErr := iter.Next(); iterErr != nil {
 			if iterErr == iterator.Done {
@@ -53,23 +56,21 @@ func SyncAllProjects() error {
 	return nil
 }
 
-func AddProject() {
-	// TODO: only for test
-	ctx := context.Background()
-	project := Project{
-		ContractAddress:  "0x8a90cab2b38dba80c64b7734e58ee1db38b8992e",
-		MappingAddress:   "",
-		Name:             "Doodles",
-		Symbol:           "DOODLE",
-		BaseURI:          "ipfs://QmPMc4tcBsMqLRuCQtPmPe84bpSjrC3Ky7t3JWuHXYB4aS/",
-		Status:           "created",
-		LastUpdateHeight: 14108230,
-	}
+func UpdateProjectLastHeight(address string, height int64) error {
+	if project, ok := projects[address]; !ok {
+		return errors.New("project not found")
+	} else {
+		project.LastUpdateHeight = height
 
-	_, err := getDbClient().Collection("projects").Doc(project.ContractAddress).Set(ctx, project)
-	if err != nil {
-		log.GetLogger().Error("add project data failed.", zap.String("error", err.Error()))
+		_, updateErr := GetDbClient().Collection("projects").Doc(project.ContractAddress).Update(context.Background(), []firestore.Update{
+			{
+				Path:  "last_update_height",
+				Value: height,
+			},
+		})
+		if updateErr == nil {
+			projects[address] = project
+		}
+		return updateErr
 	}
-
-	log.GetLogger().Info("add project data success", zap.String("name", project.Name))
 }

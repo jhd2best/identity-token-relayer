@@ -16,3 +16,6 @@
 /firebase-service-account.json
 /config.yaml
 /.idea
+/*.key
+/local_import
+/main

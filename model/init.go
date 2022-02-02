@@ -29,7 +29,7 @@ func InitDb() error {
 	return nil
 }
 
-func getDbClient() *firestore.Client {
+func GetDbClient() *firestore.Client {
 	return dbClient
 }
 

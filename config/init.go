@@ -36,8 +36,18 @@ func init() {
 		Db: &DbConfig{
 			ServiceAccountPath: "./firebase-service-account.json",
 		},
+		Aws: &AwsConfig{
+			Profile: "mainnet",
+			Region: "us-west-2",
+		},
 		Eth: &EthConfig{
 			RpcEndpoints: "",
+		},
+		Hmy: &HmyConfig{
+			RpcEndpoints: "https://api.harmony.one",
+			PrivateKeyPath: "",
+			OpenKMS: false,
+			OwnershipValidatorAddress: "",
 		},
 	}
 
