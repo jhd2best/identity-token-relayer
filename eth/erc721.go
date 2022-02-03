@@ -18,7 +18,7 @@ type NftArrayItem struct {
 	Owner string
 }
 
-func SyncOneErc721TokenOnChain(addressRaw string, tokenId int64,  syncBlockHeight int64) error {
+func SyncOneErc721TokenOnChain(addressRaw string, tokenId int64,  syncBlockHeight int64, isLatest bool) error {
 	address := common.HexToAddress(addressRaw)
 	blockHeight := big.NewInt(syncBlockHeight)
 
@@ -27,8 +27,9 @@ func SyncOneErc721TokenOnChain(addressRaw string, tokenId int64,  syncBlockHeigh
 		return err
 	}
 
-	callOpts := &bind.CallOpts{
-		BlockNumber: blockHeight,
+	callOpts := &bind.CallOpts{}
+	if !isLatest {
+		callOpts.BlockNumber = blockHeight
 	}
 
 	// get nft owners
@@ -51,7 +52,7 @@ func SyncOneErc721TokenOnChain(addressRaw string, tokenId int64,  syncBlockHeigh
 	return nil
 }
 
-func SyncAllErc721TokenOnChain(addressRaw string, syncBlockHeight int64) error {
+func SyncAllErc721TokenOnChain(addressRaw string, syncBlockHeight int64, isLatest bool) error {
 	address := common.HexToAddress(addressRaw)
 	blockHeight := big.NewInt(syncBlockHeight)
 
@@ -60,8 +61,9 @@ func SyncAllErc721TokenOnChain(addressRaw string, syncBlockHeight int64) error {
 		return err
 	}
 
-	callOpts := &bind.CallOpts{
-		BlockNumber: blockHeight,
+	callOpts := &bind.CallOpts{}
+	if !isLatest {
+		callOpts.BlockNumber = blockHeight
 	}
 
 	// get total supply

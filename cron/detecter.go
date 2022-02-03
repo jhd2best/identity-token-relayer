@@ -118,16 +118,16 @@ func GetEthTransaction() {
 
 			time.Sleep(100 * time.Millisecond)
 		}
+	}
 
-		// update project last block height
-		for _, project := range projects {
-			updateErr := model.UpdateProjectLastHeight(project.ContractAddress, needCheckBlockNum)
-			if updateErr != nil {
-				log.GetLogger().Error("update project last block height failed.", zap.String("error", updateErr.Error()))
-				continue
-			}
-			log.GetLogger().Info("update project last block height success", zap.String("project", project.Name), zap.Int64("new_height", needCheckBlockNum))
+	// update project last block height
+	for _, project := range projects {
+		updateErr := model.UpdateProjectLastHeight(project.ContractAddress, needCheckBlockNum)
+		if updateErr != nil {
+			log.GetLogger().Error("update project last block height failed.", zap.String("error", updateErr.Error()))
+			continue
 		}
+		log.GetLogger().Info("update project last block height success", zap.String("project", project.Name), zap.Int64("new_height", needCheckBlockNum))
 	}
 }
 

@@ -19,3 +19,5 @@
 /*.key
 /local_import
 /main
+*_test.go
+/relayer

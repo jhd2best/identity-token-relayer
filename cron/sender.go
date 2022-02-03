@@ -2,12 +2,12 @@ package cron
 
 import (
 	"context"
-	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"go.uber.org/zap"
 	. "identity-token-relayer/common"
+	"identity-token-relayer/eth"
 	"identity-token-relayer/hmy"
 	"identity-token-relayer/log"
 	"identity-token-relayer/model"
@@ -44,14 +44,41 @@ func SendMappingTransaction() {
 			// check nft last block height
 			nft, nftErr := model.GetProjectNftByTokenId(tran.ContractAddress, tran.TokenId)
 			if nftErr != nil {
-				log.GetLogger().Error("check nft last block height failed.", zap.String("error", nftErr.Error()))
+				log.GetLogger().Error("nft not found. try to auto-create it. ",
+					zap.String("error", nftErr.Error()),
+					zap.String("contract_address", tran.ContractAddress),
+					zap.Int64("token_id", tran.TokenId),
+				)
+
+				// sync nft from chain
+				syncErr := eth.SyncOneErc721TokenOnChain(tran.ContractAddress, tran.TokenId, tran.BlockHeight, true)
+				if syncErr != nil {
+					log.GetLogger().Error("sync nft from chain failed.",
+						zap.String("error", syncErr.Error()),
+						zap.String("contract_address", tran.ContractAddress),
+						zap.Int64("token_id", tran.TokenId),
+					)
+					continue
+				}
+
+				// skip the transaction
+				skipErr := model.SetTransactionStatus(tran.TxHash, "skipped")
+				if skipErr != nil {
+					log.GetLogger().Error("skip trans failed.",
+						zap.String("error", skipErr.Error()),
+						zap.String("tx_hash", tran.TxHash),
+					)
+				}
 				continue
 			}
 
 			if nft.LastUpdateHeight >= tran.BlockHeight {
 				skipErr := model.SetTransactionStatus(tran.TxHash, "skipped")
 				if skipErr != nil {
-					log.GetLogger().Error("skip trans failed.", zap.String("error", skipErr.Error()))
+					log.GetLogger().Error("skip trans failed.",
+						zap.String("error", skipErr.Error()),
+						zap.String("tx_hash", tran.TxHash),
+					)
 				}
 				continue
 			}
@@ -59,21 +86,30 @@ func SendMappingTransaction() {
 			// exec transaction on harmony
 			mappingTxHash, execErr := execOwnerUpdateOnHarmony(tran)
 			if execErr != nil {
-				log.GetLogger().Error("exec transaction on harmony failed.", zap.String("error", execErr.Error()))
+				log.GetLogger().Error("exec transaction on harmony failed.",
+					zap.String("error", execErr.Error()),
+					zap.String("tx_hash", tran.TxHash),
+				)
 				continue
 			}
 
 			// update transaction status
 			setErr := model.SetTransactionStatusMapping(tran.TxHash, mappingTxHash)
 			if setErr != nil {
-				log.GetLogger().Error("update transaction status to mapping failed.", zap.String("error", setErr.Error()))
+				log.GetLogger().Error("update transaction status to mapping failed.",
+					zap.String("error", setErr.Error()),
+					zap.String("tx_hash", tran.TxHash),
+				)
 				continue
 			}
 
 			// update nft new owner
 			updateNftErr := model.UpdateProjectNftOwner(tran.ContractAddress, tran.TokenId, tran.ToAddress, tran.BlockHeight)
 			if updateNftErr != nil {
-				log.GetLogger().Error("update project nft owner failed.", zap.String("error", updateNftErr.Error()))
+				log.GetLogger().Error("update project nft owner failed.",
+					zap.String("error", updateNftErr.Error()),
+					zap.String("tx_hash", tran.TxHash),
+				)
 			}
 
 			log.GetLogger().Info("update transaction status to mapping success", zap.String("tx_hash", tran.TxHash))
@@ -102,7 +138,6 @@ func CheckMappingTransaction() {
 		for _, tran := range trans {
 			// check status after 1 min
 			tranUpdatedTime, _ := time.Parse(TimeLayout, tran.UpdatedAt)
-			println(fmt.Sprintf("space: %v\n", time.Now().Sub(tranUpdatedTime)))
 
 			if time.Now().Sub(tranUpdatedTime) > time.Minute {
 				// get mapping trans receipt
@@ -127,6 +162,7 @@ func CheckMappingTransaction() {
 					}
 					log.GetLogger().Error("found failed trans.", zap.String("hash", tran.TxHash))
 				}
+				log.GetLogger().Error("set trans final status success.", zap.String("hash", tran.TxHash))
 			}
 		}
 	}
