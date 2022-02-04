@@ -15,6 +15,7 @@ func InitCron() {
 	_, _ = cronClient.AddFunc("10 * * * * *", GetEthTransaction)
 	_, _ = cronClient.AddFunc("20,50 * * * * *", SendMappingTransaction)
 	_, _ = cronClient.AddFunc("30 * * * * *", CheckMappingTransaction)
+	_, _ = cronClient.AddFunc("40 * * * * *", RetryErrorTransaction)
 
 	cronClient.Start()
 }

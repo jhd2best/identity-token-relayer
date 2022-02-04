@@ -10,6 +10,7 @@ type Config struct {
 
 type DebugConfig struct {
 	Verbose       bool
+	LogPath       string
 	DisableCron   bool
 	DisableSentry bool
 	SentryDSN     string

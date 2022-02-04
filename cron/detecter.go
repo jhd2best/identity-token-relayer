@@ -91,7 +91,15 @@ func GetEthTransaction() {
 	}
 	if len(transLogs) > 0 {
 		for _, transLog := range transLogs {
-			if int64(transLog.BlockNumber) <= projects[transLog.Address.String()].LastUpdateHeight {
+			contractAddress := transLog.Address.String()
+
+			// check project
+			if _, ok := projects[contractAddress]; !ok {
+				continue
+			}
+
+			// check project last update height
+			if int64(transLog.BlockNumber) <= projects[contractAddress].LastUpdateHeight {
 				continue
 			}
 
@@ -99,7 +107,7 @@ func GetEthTransaction() {
 				TxHash:          transLog.TxHash.String(),
 				BlockHeight:     int64(transLog.BlockNumber),
 				MappingTxHash:   "",
-				ContractAddress: transLog.Address.String(),
+				ContractAddress: contractAddress,
 				TokenId:         transLog.Topics[3].Big().Int64(),
 				FromAddress:     common.HexToAddress(transLog.Topics[1].Hex()).String(),
 				ToAddress:       common.HexToAddress(transLog.Topics[2].Hex()).String(),

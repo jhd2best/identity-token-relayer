@@ -22,7 +22,7 @@ func SyncOneErc721TokenOnChain(addressRaw string, tokenId int64,  syncBlockHeigh
 	address := common.HexToAddress(addressRaw)
 	blockHeight := big.NewInt(syncBlockHeight)
 
-	token721Client, err := token721.NewContract(address, GetEthClient().client)
+	token721Client, err := token721.NewToken721(address, GetEthClient().client)
 	if err != nil {
 		return err
 	}
@@ -56,7 +56,7 @@ func SyncAllErc721TokenOnChain(addressRaw string, syncBlockHeight int64, isLates
 	address := common.HexToAddress(addressRaw)
 	blockHeight := big.NewInt(syncBlockHeight)
 
-	token721Client, err := token721.NewContract(address, GetEthClient().client)
+	token721Client, err := token721.NewToken721(address, GetEthClient().client)
 	if err != nil {
 		return err
 	}

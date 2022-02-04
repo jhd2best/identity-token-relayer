@@ -20,7 +20,7 @@ import (
 var (
 	hmyClient     *Client
 	hmyPrivateKey string
-	OwnershipValidatorClient *ownership_validator.Contract
+	OwnershipValidatorClient *ownership_validator.OwnershipValidator
 )
 
 type Client struct {
@@ -72,10 +72,10 @@ func GetHmyClient() *Client {
 	return hmyClient
 }
 
-func GetOwnershipValidatorClient() *ownership_validator.Contract {
+func GetOwnershipValidatorClient() *ownership_validator.OwnershipValidator {
 	if OwnershipValidatorClient == nil {
 		address := common.HexToAddress(config.Get().Hmy.OwnershipValidatorAddress)
-		OwnershipValidatorClient, _ = ownership_validator.NewContract(address, GetHmyClient().client)
+		OwnershipValidatorClient, _ = ownership_validator.NewOwnershipValidator(address, GetHmyClient().client)
 	}
 	return OwnershipValidatorClient
 }

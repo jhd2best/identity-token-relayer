@@ -18,6 +18,7 @@ import (
 
 var (
 	isSendMappingTransaction  = false
+	isRetryErrorTransaction   = false
 	isCheckMappingTransaction = false
 	transOpt                  *bind.TransactOpts
 )
@@ -62,7 +63,7 @@ func SendMappingTransaction() {
 				}
 
 				// skip the transaction
-				skipErr := model.SetTransactionStatus(tran.TxHash, "skipped")
+				skipErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "skipped")
 				if skipErr != nil {
 					log.GetLogger().Error("skip trans failed.",
 						zap.String("error", skipErr.Error()),
@@ -73,7 +74,7 @@ func SendMappingTransaction() {
 			}
 
 			if nft.LastUpdateHeight >= tran.BlockHeight {
-				skipErr := model.SetTransactionStatus(tran.TxHash, "skipped")
+				skipErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "skipped")
 				if skipErr != nil {
 					log.GetLogger().Error("skip trans failed.",
 						zap.String("error", skipErr.Error()),
@@ -94,7 +95,7 @@ func SendMappingTransaction() {
 			}
 
 			// update transaction status
-			setErr := model.SetTransactionStatusMapping(tran.TxHash, mappingTxHash)
+			setErr := model.SetTransactionStatusMapping(tran.TxHash, tran.ContractAddress, tran.TokenId, mappingTxHash)
 			if setErr != nil {
 				log.GetLogger().Error("update transaction status to mapping failed.",
 					zap.String("error", setErr.Error()),
@@ -103,13 +104,70 @@ func SendMappingTransaction() {
 				continue
 			}
 
-			// update nft new owner
-			updateNftErr := model.UpdateProjectNftOwner(tran.ContractAddress, tran.TokenId, tran.ToAddress, tran.BlockHeight)
-			if updateNftErr != nil {
-				log.GetLogger().Error("update project nft owner failed.",
-					zap.String("error", updateNftErr.Error()),
+			log.GetLogger().Info("update transaction status to mapping success", zap.String("tx_hash", tran.TxHash))
+		}
+	}
+}
+
+func RetryErrorTransaction() {
+	if isRetryErrorTransaction {
+		return
+	}
+	isRetryErrorTransaction = true
+
+	defer func() {
+		isRetryErrorTransaction = false
+	}()
+
+	// get created transactions
+	trans, getErr := model.GetTransactionByStatus("error")
+	if getErr != nil {
+		log.GetLogger().Error("get error transactions failed.", zap.String("error", getErr.Error()))
+		return
+	}
+
+	if len(trans) > 0 {
+		for _, tran := range trans {
+			// check nft last block height
+			nft, nftErr := model.GetProjectNftByTokenId(tran.ContractAddress, tran.TokenId)
+			if nftErr != nil {
+				log.GetLogger().Error("nft not found.",
+					zap.String("error", nftErr.Error()),
+					zap.String("contract_address", tran.ContractAddress),
+					zap.Int64("token_id", tran.TokenId),
+				)
+				continue
+			}
+
+			if nft.LastUpdateHeight >= tran.BlockHeight {
+				skipErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "skipped")
+				if skipErr != nil {
+					log.GetLogger().Error("skip trans failed.",
+						zap.String("error", skipErr.Error()),
+						zap.String("tx_hash", tran.TxHash),
+					)
+				}
+				continue
+			}
+
+			// exec transaction on harmony
+			mappingTxHash, execErr := execOwnerUpdateOnHarmony(tran)
+			if execErr != nil {
+				log.GetLogger().Error("exec transaction on harmony failed.",
+					zap.String("error", execErr.Error()),
 					zap.String("tx_hash", tran.TxHash),
 				)
+				continue
+			}
+
+			// update transaction status
+			setErr := model.SetTransactionStatusMapping(tran.TxHash, tran.ContractAddress, tran.TokenId, mappingTxHash)
+			if setErr != nil {
+				log.GetLogger().Error("update transaction status to mapping failed.",
+					zap.String("error", setErr.Error()),
+					zap.String("tx_hash", tran.TxHash),
+				)
+				continue
 			}
 
 			log.GetLogger().Info("update transaction status to mapping success", zap.String("tx_hash", tran.TxHash))
@@ -149,20 +207,38 @@ func CheckMappingTransaction() {
 
 				// set trans final status
 				if receipt.Status == 1 {
-					setErr := model.SetTransactionStatus(tran.TxHash, "success")
+					setErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "success")
 					if setErr != nil {
 						log.GetLogger().Error("set trans final status failed.", zap.String("error", setErr.Error()), zap.String("hash", tran.TxHash))
 						continue
+					}
+
+					// update nft new owner
+					updateNftErr := model.UpdateProjectNftOwner(tran.ContractAddress, tran.TokenId, tran.ToAddress, tran.BlockHeight)
+					if updateNftErr != nil {
+						log.GetLogger().Error("update project nft owner failed.",
+							zap.String("error", updateNftErr.Error()),
+							zap.String("tx_hash", tran.TxHash),
+						)
 					}
 				} else {
-					setErr := model.SetTransactionStatus(tran.TxHash, "failed")
-					if setErr != nil {
-						log.GetLogger().Error("set trans final status failed.", zap.String("error", setErr.Error()), zap.String("hash", tran.TxHash))
-						continue
+					if tran.RetryTimes <= 3 {
+						tran.RetryTimes++
+						setErr := model.SetTransactionStatusError(tran.TxHash, tran.ContractAddress, tran.TokenId, tran.RetryTimes)
+						if setErr != nil {
+							log.GetLogger().Error("set trans error status failed.", zap.String("error", setErr.Error()), zap.String("hash", tran.TxHash))
+							continue
+						}
+					} else {
+						setErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "failed")
+						if setErr != nil {
+							log.GetLogger().Error("set trans final status failed.", zap.String("error", setErr.Error()), zap.String("hash", tran.TxHash))
+							continue
+						}
 					}
-					log.GetLogger().Error("found failed trans.", zap.String("hash", tran.TxHash))
+					log.GetLogger().Info("found error trans.", zap.String("hash", tran.TxHash))
 				}
-				log.GetLogger().Error("set trans final status success.", zap.String("hash", tran.TxHash))
+				log.GetLogger().Info("set trans final status success.", zap.String("hash", tran.TxHash))
 			}
 		}
 	}
@@ -206,9 +282,8 @@ func execOwnerUpdateOnHarmony(tran model.Transaction) (hash string, err error) {
 	ethContractAddress = strings.Replace(ethContractAddress, "0x", "", 1)
 	newOwnerAddress := common.HexToAddress(tran.ToAddress)
 	tokenIdBig := big.NewInt(tran.TokenId)
-	blockHeightBig := big.NewInt(tran.BlockHeight)
 
-	execTrans, execErr := hmy.GetOwnershipValidatorClient().UpdateOwnership(transOpt, ethContractAddress, []common.Address{newOwnerAddress}, []*big.Int{tokenIdBig}, blockHeightBig)
+	execTrans, execErr := hmy.GetOwnershipValidatorClient().UpdateOwnership(transOpt, ethContractAddress, []common.Address{newOwnerAddress}, []*big.Int{tokenIdBig})
 	if execErr != nil {
 		return "", execErr
 	}

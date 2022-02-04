@@ -58,9 +58,6 @@ func main() {
 		func() {
 			cron.HandlePendingTransaction()
 			log.GetLogger().Info("pending transaction handled")
-
-			_ = model.CloseDb()
-			log.GetLogger().Info("db connection closed")
 		},
 		func() {
 			cron.StopCron(ctx)

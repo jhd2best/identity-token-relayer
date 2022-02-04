@@ -28,113 +28,113 @@ var (
 	_ = event.NewSubscription
 )
 
-// ContractMetaData contains all meta data concerning the Contract contract.
-var ContractMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name_\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol_\",\"type\":\"string\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"approved\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"baseURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getApproved\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"baseURI_\",\"type\":\"string\"}],\"name\":\"setBaseURI\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenOfOwnerByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"}],\"name\":\"updateOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+// Token721MetaData contains all meta data concerning the Token721 contract.
+var Token721MetaData = &bind.MetaData{
+	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"approved\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"baseURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getApproved\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"baseURI_\",\"type\":\"string\"}],\"name\":\"setBaseURI\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenOfOwnerByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"}],\"name\":\"updateOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
-// ContractABI is the input ABI used to generate the binding from.
-// Deprecated: Use ContractMetaData.ABI instead.
-var ContractABI = ContractMetaData.ABI
+// Token721ABI is the input ABI used to generate the binding from.
+// Deprecated: Use Token721MetaData.ABI instead.
+var Token721ABI = Token721MetaData.ABI
 
-// Contract is an auto generated Go binding around an Ethereum contract.
-type Contract struct {
-	ContractCaller     // Read-only binding to the contract
-	ContractTransactor // Write-only binding to the contract
-	ContractFilterer   // Log filterer for contract events
+// Token721 is an auto generated Go binding around an Ethereum contract.
+type Token721 struct {
+	Token721Caller     // Read-only binding to the contract
+	Token721Transactor // Write-only binding to the contract
+	Token721Filterer   // Log filterer for contract events
 }
 
-// ContractCaller is an auto generated read-only Go binding around an Ethereum contract.
-type ContractCaller struct {
+// Token721Caller is an auto generated read-only Go binding around an Ethereum contract.
+type Token721Caller struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractTransactor is an auto generated write-only Go binding around an Ethereum contract.
-type ContractTransactor struct {
+// Token721Transactor is an auto generated write-only Go binding around an Ethereum contract.
+type Token721Transactor struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
-type ContractFilterer struct {
+// Token721Filterer is an auto generated log filtering Go binding around an Ethereum contract events.
+type Token721Filterer struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractSession is an auto generated Go binding around an Ethereum contract,
+// Token721Session is an auto generated Go binding around an Ethereum contract,
 // with pre-set call and transact options.
-type ContractSession struct {
-	Contract     *Contract         // Generic contract binding to set the session for
+type Token721Session struct {
+	Contract     *Token721         // Generic contract binding to set the session for
 	CallOpts     bind.CallOpts     // Call options to use throughout this session
 	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
 }
 
-// ContractCallerSession is an auto generated read-only Go binding around an Ethereum contract,
+// Token721CallerSession is an auto generated read-only Go binding around an Ethereum contract,
 // with pre-set call options.
-type ContractCallerSession struct {
-	Contract *ContractCaller // Generic contract caller binding to set the session for
+type Token721CallerSession struct {
+	Contract *Token721Caller // Generic contract caller binding to set the session for
 	CallOpts bind.CallOpts   // Call options to use throughout this session
 }
 
-// ContractTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
+// Token721TransactorSession is an auto generated write-only Go binding around an Ethereum contract,
 // with pre-set transact options.
-type ContractTransactorSession struct {
-	Contract     *ContractTransactor // Generic contract transactor binding to set the session for
+type Token721TransactorSession struct {
+	Contract     *Token721Transactor // Generic contract transactor binding to set the session for
 	TransactOpts bind.TransactOpts   // Transaction auth options to use throughout this session
 }
 
-// ContractRaw is an auto generated low-level Go binding around an Ethereum contract.
-type ContractRaw struct {
-	Contract *Contract // Generic contract binding to access the raw methods on
+// Token721Raw is an auto generated low-level Go binding around an Ethereum contract.
+type Token721Raw struct {
+	Contract *Token721 // Generic contract binding to access the raw methods on
 }
 
-// ContractCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
-type ContractCallerRaw struct {
-	Contract *ContractCaller // Generic read-only contract binding to access the raw methods on
+// Token721CallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
+type Token721CallerRaw struct {
+	Contract *Token721Caller // Generic read-only contract binding to access the raw methods on
 }
 
-// ContractTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
-type ContractTransactorRaw struct {
-	Contract *ContractTransactor // Generic write-only contract binding to access the raw methods on
+// Token721TransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
+type Token721TransactorRaw struct {
+	Contract *Token721Transactor // Generic write-only contract binding to access the raw methods on
 }
 
-// NewContract creates a new instance of Contract, bound to a specific deployed contract.
-func NewContract(address common.Address, backend bind.ContractBackend) (*Contract, error) {
-	contract, err := bindContract(address, backend, backend, backend)
+// NewToken721 creates a new instance of Token721, bound to a specific deployed contract.
+func NewToken721(address common.Address, backend bind.ContractBackend) (*Token721, error) {
+	contract, err := bindToken721(address, backend, backend, backend)
 	if err != nil {
 		return nil, err
 	}
-	return &Contract{ContractCaller: ContractCaller{contract: contract}, ContractTransactor: ContractTransactor{contract: contract}, ContractFilterer: ContractFilterer{contract: contract}}, nil
+	return &Token721{Token721Caller: Token721Caller{contract: contract}, Token721Transactor: Token721Transactor{contract: contract}, Token721Filterer: Token721Filterer{contract: contract}}, nil
 }
 
-// NewContractCaller creates a new read-only instance of Contract, bound to a specific deployed contract.
-func NewContractCaller(address common.Address, caller bind.ContractCaller) (*ContractCaller, error) {
-	contract, err := bindContract(address, caller, nil, nil)
+// NewToken721Caller creates a new read-only instance of Token721, bound to a specific deployed contract.
+func NewToken721Caller(address common.Address, caller bind.ContractCaller) (*Token721Caller, error) {
+	contract, err := bindToken721(address, caller, nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractCaller{contract: contract}, nil
+	return &Token721Caller{contract: contract}, nil
 }
 
-// NewContractTransactor creates a new write-only instance of Contract, bound to a specific deployed contract.
-func NewContractTransactor(address common.Address, transactor bind.ContractTransactor) (*ContractTransactor, error) {
-	contract, err := bindContract(address, nil, transactor, nil)
+// NewToken721Transactor creates a new write-only instance of Token721, bound to a specific deployed contract.
+func NewToken721Transactor(address common.Address, transactor bind.ContractTransactor) (*Token721Transactor, error) {
+	contract, err := bindToken721(address, nil, transactor, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractTransactor{contract: contract}, nil
+	return &Token721Transactor{contract: contract}, nil
 }
 
-// NewContractFilterer creates a new log filterer instance of Contract, bound to a specific deployed contract.
-func NewContractFilterer(address common.Address, filterer bind.ContractFilterer) (*ContractFilterer, error) {
-	contract, err := bindContract(address, nil, nil, filterer)
+// NewToken721Filterer creates a new log filterer instance of Token721, bound to a specific deployed contract.
+func NewToken721Filterer(address common.Address, filterer bind.ContractFilterer) (*Token721Filterer, error) {
+	contract, err := bindToken721(address, nil, nil, filterer)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractFilterer{contract: contract}, nil
+	return &Token721Filterer{contract: contract}, nil
 }
 
-// bindContract binds a generic wrapper to an already deployed contract.
-func bindContract(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(ContractABI))
+// bindToken721 binds a generic wrapper to an already deployed contract.
+func bindToken721(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
+	parsed, err := abi.JSON(strings.NewReader(Token721ABI))
 	if err != nil {
 		return nil, err
 	}
@@ -145,46 +145,46 @@ func bindContract(address common.Address, caller bind.ContractCaller, transactor
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Contract *ContractRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Contract.Contract.ContractCaller.contract.Call(opts, result, method, params...)
+func (_Token721 *Token721Raw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _Token721.Contract.Token721Caller.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Contract *ContractRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Contract.Contract.ContractTransactor.contract.Transfer(opts)
+func (_Token721 *Token721Raw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Token721.Contract.Token721Transactor.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Contract *ContractRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Contract.Contract.ContractTransactor.contract.Transact(opts, method, params...)
+func (_Token721 *Token721Raw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _Token721.Contract.Token721Transactor.contract.Transact(opts, method, params...)
 }
 
 // Call invokes the (constant) contract method with params as input values and
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Contract *ContractCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Contract.Contract.contract.Call(opts, result, method, params...)
+func (_Token721 *Token721CallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _Token721.Contract.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Contract *ContractTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Contract.Contract.contract.Transfer(opts)
+func (_Token721 *Token721TransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Token721.Contract.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Contract *ContractTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Contract.Contract.contract.Transact(opts, method, params...)
+func (_Token721 *Token721TransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _Token721.Contract.contract.Transact(opts, method, params...)
 }
 
 // BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
 //
 // Solidity: function balanceOf(address owner) view returns(uint256)
-func (_Contract *ContractCaller) BalanceOf(opts *bind.CallOpts, owner common.Address) (*big.Int, error) {
+func (_Token721 *Token721Caller) BalanceOf(opts *bind.CallOpts, owner common.Address) (*big.Int, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "balanceOf", owner)
+	err := _Token721.contract.Call(opts, &out, "balanceOf", owner)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -199,23 +199,23 @@ func (_Contract *ContractCaller) BalanceOf(opts *bind.CallOpts, owner common.Add
 // BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
 //
 // Solidity: function balanceOf(address owner) view returns(uint256)
-func (_Contract *ContractSession) BalanceOf(owner common.Address) (*big.Int, error) {
-	return _Contract.Contract.BalanceOf(&_Contract.CallOpts, owner)
+func (_Token721 *Token721Session) BalanceOf(owner common.Address) (*big.Int, error) {
+	return _Token721.Contract.BalanceOf(&_Token721.CallOpts, owner)
 }
 
 // BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
 //
 // Solidity: function balanceOf(address owner) view returns(uint256)
-func (_Contract *ContractCallerSession) BalanceOf(owner common.Address) (*big.Int, error) {
-	return _Contract.Contract.BalanceOf(&_Contract.CallOpts, owner)
+func (_Token721 *Token721CallerSession) BalanceOf(owner common.Address) (*big.Int, error) {
+	return _Token721.Contract.BalanceOf(&_Token721.CallOpts, owner)
 }
 
 // BaseURI is a free data retrieval call binding the contract method 0x6c0360eb.
 //
 // Solidity: function baseURI() view returns(string)
-func (_Contract *ContractCaller) BaseURI(opts *bind.CallOpts) (string, error) {
+func (_Token721 *Token721Caller) BaseURI(opts *bind.CallOpts) (string, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "baseURI")
+	err := _Token721.contract.Call(opts, &out, "baseURI")
 
 	if err != nil {
 		return *new(string), err
@@ -230,23 +230,23 @@ func (_Contract *ContractCaller) BaseURI(opts *bind.CallOpts) (string, error) {
 // BaseURI is a free data retrieval call binding the contract method 0x6c0360eb.
 //
 // Solidity: function baseURI() view returns(string)
-func (_Contract *ContractSession) BaseURI() (string, error) {
-	return _Contract.Contract.BaseURI(&_Contract.CallOpts)
+func (_Token721 *Token721Session) BaseURI() (string, error) {
+	return _Token721.Contract.BaseURI(&_Token721.CallOpts)
 }
 
 // BaseURI is a free data retrieval call binding the contract method 0x6c0360eb.
 //
 // Solidity: function baseURI() view returns(string)
-func (_Contract *ContractCallerSession) BaseURI() (string, error) {
-	return _Contract.Contract.BaseURI(&_Contract.CallOpts)
+func (_Token721 *Token721CallerSession) BaseURI() (string, error) {
+	return _Token721.Contract.BaseURI(&_Token721.CallOpts)
 }
 
 // GetApproved is a free data retrieval call binding the contract method 0x081812fc.
 //
 // Solidity: function getApproved(uint256 tokenId) view returns(address)
-func (_Contract *ContractCaller) GetApproved(opts *bind.CallOpts, tokenId *big.Int) (common.Address, error) {
+func (_Token721 *Token721Caller) GetApproved(opts *bind.CallOpts, tokenId *big.Int) (common.Address, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "getApproved", tokenId)
+	err := _Token721.contract.Call(opts, &out, "getApproved", tokenId)
 
 	if err != nil {
 		return *new(common.Address), err
@@ -261,23 +261,23 @@ func (_Contract *ContractCaller) GetApproved(opts *bind.CallOpts, tokenId *big.I
 // GetApproved is a free data retrieval call binding the contract method 0x081812fc.
 //
 // Solidity: function getApproved(uint256 tokenId) view returns(address)
-func (_Contract *ContractSession) GetApproved(tokenId *big.Int) (common.Address, error) {
-	return _Contract.Contract.GetApproved(&_Contract.CallOpts, tokenId)
+func (_Token721 *Token721Session) GetApproved(tokenId *big.Int) (common.Address, error) {
+	return _Token721.Contract.GetApproved(&_Token721.CallOpts, tokenId)
 }
 
 // GetApproved is a free data retrieval call binding the contract method 0x081812fc.
 //
 // Solidity: function getApproved(uint256 tokenId) view returns(address)
-func (_Contract *ContractCallerSession) GetApproved(tokenId *big.Int) (common.Address, error) {
-	return _Contract.Contract.GetApproved(&_Contract.CallOpts, tokenId)
+func (_Token721 *Token721CallerSession) GetApproved(tokenId *big.Int) (common.Address, error) {
+	return _Token721.Contract.GetApproved(&_Token721.CallOpts, tokenId)
 }
 
 // IsApprovedForAll is a free data retrieval call binding the contract method 0xe985e9c5.
 //
 // Solidity: function isApprovedForAll(address owner, address operator) view returns(bool)
-func (_Contract *ContractCaller) IsApprovedForAll(opts *bind.CallOpts, owner common.Address, operator common.Address) (bool, error) {
+func (_Token721 *Token721Caller) IsApprovedForAll(opts *bind.CallOpts, owner common.Address, operator common.Address) (bool, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "isApprovedForAll", owner, operator)
+	err := _Token721.contract.Call(opts, &out, "isApprovedForAll", owner, operator)
 
 	if err != nil {
 		return *new(bool), err
@@ -292,23 +292,23 @@ func (_Contract *ContractCaller) IsApprovedForAll(opts *bind.CallOpts, owner com
 // IsApprovedForAll is a free data retrieval call binding the contract method 0xe985e9c5.
 //
 // Solidity: function isApprovedForAll(address owner, address operator) view returns(bool)
-func (_Contract *ContractSession) IsApprovedForAll(owner common.Address, operator common.Address) (bool, error) {
-	return _Contract.Contract.IsApprovedForAll(&_Contract.CallOpts, owner, operator)
+func (_Token721 *Token721Session) IsApprovedForAll(owner common.Address, operator common.Address) (bool, error) {
+	return _Token721.Contract.IsApprovedForAll(&_Token721.CallOpts, owner, operator)
 }
 
 // IsApprovedForAll is a free data retrieval call binding the contract method 0xe985e9c5.
 //
 // Solidity: function isApprovedForAll(address owner, address operator) view returns(bool)
-func (_Contract *ContractCallerSession) IsApprovedForAll(owner common.Address, operator common.Address) (bool, error) {
-	return _Contract.Contract.IsApprovedForAll(&_Contract.CallOpts, owner, operator)
+func (_Token721 *Token721CallerSession) IsApprovedForAll(owner common.Address, operator common.Address) (bool, error) {
+	return _Token721.Contract.IsApprovedForAll(&_Token721.CallOpts, owner, operator)
 }
 
 // Name is a free data retrieval call binding the contract method 0x06fdde03.
 //
 // Solidity: function name() view returns(string)
-func (_Contract *ContractCaller) Name(opts *bind.CallOpts) (string, error) {
+func (_Token721 *Token721Caller) Name(opts *bind.CallOpts) (string, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "name")
+	err := _Token721.contract.Call(opts, &out, "name")
 
 	if err != nil {
 		return *new(string), err
@@ -323,23 +323,23 @@ func (_Contract *ContractCaller) Name(opts *bind.CallOpts) (string, error) {
 // Name is a free data retrieval call binding the contract method 0x06fdde03.
 //
 // Solidity: function name() view returns(string)
-func (_Contract *ContractSession) Name() (string, error) {
-	return _Contract.Contract.Name(&_Contract.CallOpts)
+func (_Token721 *Token721Session) Name() (string, error) {
+	return _Token721.Contract.Name(&_Token721.CallOpts)
 }
 
 // Name is a free data retrieval call binding the contract method 0x06fdde03.
 //
 // Solidity: function name() view returns(string)
-func (_Contract *ContractCallerSession) Name() (string, error) {
-	return _Contract.Contract.Name(&_Contract.CallOpts)
+func (_Token721 *Token721CallerSession) Name() (string, error) {
+	return _Token721.Contract.Name(&_Token721.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contract *ContractCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
+func (_Token721 *Token721Caller) Owner(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "owner")
+	err := _Token721.contract.Call(opts, &out, "owner")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -354,23 +354,23 @@ func (_Contract *ContractCaller) Owner(opts *bind.CallOpts) (common.Address, err
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contract *ContractSession) Owner() (common.Address, error) {
-	return _Contract.Contract.Owner(&_Contract.CallOpts)
+func (_Token721 *Token721Session) Owner() (common.Address, error) {
+	return _Token721.Contract.Owner(&_Token721.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contract *ContractCallerSession) Owner() (common.Address, error) {
-	return _Contract.Contract.Owner(&_Contract.CallOpts)
+func (_Token721 *Token721CallerSession) Owner() (common.Address, error) {
+	return _Token721.Contract.Owner(&_Token721.CallOpts)
 }
 
 // OwnerOf is a free data retrieval call binding the contract method 0x6352211e.
 //
 // Solidity: function ownerOf(uint256 tokenId) view returns(address)
-func (_Contract *ContractCaller) OwnerOf(opts *bind.CallOpts, tokenId *big.Int) (common.Address, error) {
+func (_Token721 *Token721Caller) OwnerOf(opts *bind.CallOpts, tokenId *big.Int) (common.Address, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "ownerOf", tokenId)
+	err := _Token721.contract.Call(opts, &out, "ownerOf", tokenId)
 
 	if err != nil {
 		return *new(common.Address), err
@@ -385,23 +385,23 @@ func (_Contract *ContractCaller) OwnerOf(opts *bind.CallOpts, tokenId *big.Int) 
 // OwnerOf is a free data retrieval call binding the contract method 0x6352211e.
 //
 // Solidity: function ownerOf(uint256 tokenId) view returns(address)
-func (_Contract *ContractSession) OwnerOf(tokenId *big.Int) (common.Address, error) {
-	return _Contract.Contract.OwnerOf(&_Contract.CallOpts, tokenId)
+func (_Token721 *Token721Session) OwnerOf(tokenId *big.Int) (common.Address, error) {
+	return _Token721.Contract.OwnerOf(&_Token721.CallOpts, tokenId)
 }
 
 // OwnerOf is a free data retrieval call binding the contract method 0x6352211e.
 //
 // Solidity: function ownerOf(uint256 tokenId) view returns(address)
-func (_Contract *ContractCallerSession) OwnerOf(tokenId *big.Int) (common.Address, error) {
-	return _Contract.Contract.OwnerOf(&_Contract.CallOpts, tokenId)
+func (_Token721 *Token721CallerSession) OwnerOf(tokenId *big.Int) (common.Address, error) {
+	return _Token721.Contract.OwnerOf(&_Token721.CallOpts, tokenId)
 }
 
 // SupportsInterface is a free data retrieval call binding the contract method 0x01ffc9a7.
 //
 // Solidity: function supportsInterface(bytes4 interfaceId) view returns(bool)
-func (_Contract *ContractCaller) SupportsInterface(opts *bind.CallOpts, interfaceId [4]byte) (bool, error) {
+func (_Token721 *Token721Caller) SupportsInterface(opts *bind.CallOpts, interfaceId [4]byte) (bool, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "supportsInterface", interfaceId)
+	err := _Token721.contract.Call(opts, &out, "supportsInterface", interfaceId)
 
 	if err != nil {
 		return *new(bool), err
@@ -416,23 +416,23 @@ func (_Contract *ContractCaller) SupportsInterface(opts *bind.CallOpts, interfac
 // SupportsInterface is a free data retrieval call binding the contract method 0x01ffc9a7.
 //
 // Solidity: function supportsInterface(bytes4 interfaceId) view returns(bool)
-func (_Contract *ContractSession) SupportsInterface(interfaceId [4]byte) (bool, error) {
-	return _Contract.Contract.SupportsInterface(&_Contract.CallOpts, interfaceId)
+func (_Token721 *Token721Session) SupportsInterface(interfaceId [4]byte) (bool, error) {
+	return _Token721.Contract.SupportsInterface(&_Token721.CallOpts, interfaceId)
 }
 
 // SupportsInterface is a free data retrieval call binding the contract method 0x01ffc9a7.
 //
 // Solidity: function supportsInterface(bytes4 interfaceId) view returns(bool)
-func (_Contract *ContractCallerSession) SupportsInterface(interfaceId [4]byte) (bool, error) {
-	return _Contract.Contract.SupportsInterface(&_Contract.CallOpts, interfaceId)
+func (_Token721 *Token721CallerSession) SupportsInterface(interfaceId [4]byte) (bool, error) {
+	return _Token721.Contract.SupportsInterface(&_Token721.CallOpts, interfaceId)
 }
 
 // Symbol is a free data retrieval call binding the contract method 0x95d89b41.
 //
 // Solidity: function symbol() view returns(string)
-func (_Contract *ContractCaller) Symbol(opts *bind.CallOpts) (string, error) {
+func (_Token721 *Token721Caller) Symbol(opts *bind.CallOpts) (string, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "symbol")
+	err := _Token721.contract.Call(opts, &out, "symbol")
 
 	if err != nil {
 		return *new(string), err
@@ -447,23 +447,23 @@ func (_Contract *ContractCaller) Symbol(opts *bind.CallOpts) (string, error) {
 // Symbol is a free data retrieval call binding the contract method 0x95d89b41.
 //
 // Solidity: function symbol() view returns(string)
-func (_Contract *ContractSession) Symbol() (string, error) {
-	return _Contract.Contract.Symbol(&_Contract.CallOpts)
+func (_Token721 *Token721Session) Symbol() (string, error) {
+	return _Token721.Contract.Symbol(&_Token721.CallOpts)
 }
 
 // Symbol is a free data retrieval call binding the contract method 0x95d89b41.
 //
 // Solidity: function symbol() view returns(string)
-func (_Contract *ContractCallerSession) Symbol() (string, error) {
-	return _Contract.Contract.Symbol(&_Contract.CallOpts)
+func (_Token721 *Token721CallerSession) Symbol() (string, error) {
+	return _Token721.Contract.Symbol(&_Token721.CallOpts)
 }
 
 // TokenByIndex is a free data retrieval call binding the contract method 0x4f6ccce7.
 //
 // Solidity: function tokenByIndex(uint256 index) view returns(uint256)
-func (_Contract *ContractCaller) TokenByIndex(opts *bind.CallOpts, index *big.Int) (*big.Int, error) {
+func (_Token721 *Token721Caller) TokenByIndex(opts *bind.CallOpts, index *big.Int) (*big.Int, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "tokenByIndex", index)
+	err := _Token721.contract.Call(opts, &out, "tokenByIndex", index)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -478,23 +478,23 @@ func (_Contract *ContractCaller) TokenByIndex(opts *bind.CallOpts, index *big.In
 // TokenByIndex is a free data retrieval call binding the contract method 0x4f6ccce7.
 //
 // Solidity: function tokenByIndex(uint256 index) view returns(uint256)
-func (_Contract *ContractSession) TokenByIndex(index *big.Int) (*big.Int, error) {
-	return _Contract.Contract.TokenByIndex(&_Contract.CallOpts, index)
+func (_Token721 *Token721Session) TokenByIndex(index *big.Int) (*big.Int, error) {
+	return _Token721.Contract.TokenByIndex(&_Token721.CallOpts, index)
 }
 
 // TokenByIndex is a free data retrieval call binding the contract method 0x4f6ccce7.
 //
 // Solidity: function tokenByIndex(uint256 index) view returns(uint256)
-func (_Contract *ContractCallerSession) TokenByIndex(index *big.Int) (*big.Int, error) {
-	return _Contract.Contract.TokenByIndex(&_Contract.CallOpts, index)
+func (_Token721 *Token721CallerSession) TokenByIndex(index *big.Int) (*big.Int, error) {
+	return _Token721.Contract.TokenByIndex(&_Token721.CallOpts, index)
 }
 
 // TokenOfOwnerByIndex is a free data retrieval call binding the contract method 0x2f745c59.
 //
 // Solidity: function tokenOfOwnerByIndex(address owner, uint256 index) view returns(uint256)
-func (_Contract *ContractCaller) TokenOfOwnerByIndex(opts *bind.CallOpts, owner common.Address, index *big.Int) (*big.Int, error) {
+func (_Token721 *Token721Caller) TokenOfOwnerByIndex(opts *bind.CallOpts, owner common.Address, index *big.Int) (*big.Int, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "tokenOfOwnerByIndex", owner, index)
+	err := _Token721.contract.Call(opts, &out, "tokenOfOwnerByIndex", owner, index)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -509,23 +509,23 @@ func (_Contract *ContractCaller) TokenOfOwnerByIndex(opts *bind.CallOpts, owner 
 // TokenOfOwnerByIndex is a free data retrieval call binding the contract method 0x2f745c59.
 //
 // Solidity: function tokenOfOwnerByIndex(address owner, uint256 index) view returns(uint256)
-func (_Contract *ContractSession) TokenOfOwnerByIndex(owner common.Address, index *big.Int) (*big.Int, error) {
-	return _Contract.Contract.TokenOfOwnerByIndex(&_Contract.CallOpts, owner, index)
+func (_Token721 *Token721Session) TokenOfOwnerByIndex(owner common.Address, index *big.Int) (*big.Int, error) {
+	return _Token721.Contract.TokenOfOwnerByIndex(&_Token721.CallOpts, owner, index)
 }
 
 // TokenOfOwnerByIndex is a free data retrieval call binding the contract method 0x2f745c59.
 //
 // Solidity: function tokenOfOwnerByIndex(address owner, uint256 index) view returns(uint256)
-func (_Contract *ContractCallerSession) TokenOfOwnerByIndex(owner common.Address, index *big.Int) (*big.Int, error) {
-	return _Contract.Contract.TokenOfOwnerByIndex(&_Contract.CallOpts, owner, index)
+func (_Token721 *Token721CallerSession) TokenOfOwnerByIndex(owner common.Address, index *big.Int) (*big.Int, error) {
+	return _Token721.Contract.TokenOfOwnerByIndex(&_Token721.CallOpts, owner, index)
 }
 
 // TokenURI is a free data retrieval call binding the contract method 0xc87b56dd.
 //
 // Solidity: function tokenURI(uint256 tokenId) view returns(string)
-func (_Contract *ContractCaller) TokenURI(opts *bind.CallOpts, tokenId *big.Int) (string, error) {
+func (_Token721 *Token721Caller) TokenURI(opts *bind.CallOpts, tokenId *big.Int) (string, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "tokenURI", tokenId)
+	err := _Token721.contract.Call(opts, &out, "tokenURI", tokenId)
 
 	if err != nil {
 		return *new(string), err
@@ -540,23 +540,23 @@ func (_Contract *ContractCaller) TokenURI(opts *bind.CallOpts, tokenId *big.Int)
 // TokenURI is a free data retrieval call binding the contract method 0xc87b56dd.
 //
 // Solidity: function tokenURI(uint256 tokenId) view returns(string)
-func (_Contract *ContractSession) TokenURI(tokenId *big.Int) (string, error) {
-	return _Contract.Contract.TokenURI(&_Contract.CallOpts, tokenId)
+func (_Token721 *Token721Session) TokenURI(tokenId *big.Int) (string, error) {
+	return _Token721.Contract.TokenURI(&_Token721.CallOpts, tokenId)
 }
 
 // TokenURI is a free data retrieval call binding the contract method 0xc87b56dd.
 //
 // Solidity: function tokenURI(uint256 tokenId) view returns(string)
-func (_Contract *ContractCallerSession) TokenURI(tokenId *big.Int) (string, error) {
-	return _Contract.Contract.TokenURI(&_Contract.CallOpts, tokenId)
+func (_Token721 *Token721CallerSession) TokenURI(tokenId *big.Int) (string, error) {
+	return _Token721.Contract.TokenURI(&_Token721.CallOpts, tokenId)
 }
 
 // TotalSupply is a free data retrieval call binding the contract method 0x18160ddd.
 //
 // Solidity: function totalSupply() view returns(uint256)
-func (_Contract *ContractCaller) TotalSupply(opts *bind.CallOpts) (*big.Int, error) {
+func (_Token721 *Token721Caller) TotalSupply(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "totalSupply")
+	err := _Token721.contract.Call(opts, &out, "totalSupply")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -571,230 +571,230 @@ func (_Contract *ContractCaller) TotalSupply(opts *bind.CallOpts) (*big.Int, err
 // TotalSupply is a free data retrieval call binding the contract method 0x18160ddd.
 //
 // Solidity: function totalSupply() view returns(uint256)
-func (_Contract *ContractSession) TotalSupply() (*big.Int, error) {
-	return _Contract.Contract.TotalSupply(&_Contract.CallOpts)
+func (_Token721 *Token721Session) TotalSupply() (*big.Int, error) {
+	return _Token721.Contract.TotalSupply(&_Token721.CallOpts)
 }
 
 // TotalSupply is a free data retrieval call binding the contract method 0x18160ddd.
 //
 // Solidity: function totalSupply() view returns(uint256)
-func (_Contract *ContractCallerSession) TotalSupply() (*big.Int, error) {
-	return _Contract.Contract.TotalSupply(&_Contract.CallOpts)
+func (_Token721 *Token721CallerSession) TotalSupply() (*big.Int, error) {
+	return _Token721.Contract.TotalSupply(&_Token721.CallOpts)
 }
 
 // Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
 //
 // Solidity: function approve(address to, uint256 tokenId) returns()
-func (_Contract *ContractTransactor) Approve(opts *bind.TransactOpts, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "approve", to, tokenId)
+func (_Token721 *Token721Transactor) Approve(opts *bind.TransactOpts, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "approve", to, tokenId)
 }
 
 // Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
 //
 // Solidity: function approve(address to, uint256 tokenId) returns()
-func (_Contract *ContractSession) Approve(to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.Approve(&_Contract.TransactOpts, to, tokenId)
+func (_Token721 *Token721Session) Approve(to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.Approve(&_Token721.TransactOpts, to, tokenId)
 }
 
 // Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
 //
 // Solidity: function approve(address to, uint256 tokenId) returns()
-func (_Contract *ContractTransactorSession) Approve(to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.Approve(&_Contract.TransactOpts, to, tokenId)
+func (_Token721 *Token721TransactorSession) Approve(to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.Approve(&_Token721.TransactOpts, to, tokenId)
 }
 
 // Initialize is a paid mutator transaction binding the contract method 0x7fbbe46f.
 //
 // Solidity: function initialize(address[] owners, uint256[] tokenIds) returns()
-func (_Contract *ContractTransactor) Initialize(opts *bind.TransactOpts, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "initialize", owners, tokenIds)
+func (_Token721 *Token721Transactor) Initialize(opts *bind.TransactOpts, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "initialize", owners, tokenIds)
 }
 
 // Initialize is a paid mutator transaction binding the contract method 0x7fbbe46f.
 //
 // Solidity: function initialize(address[] owners, uint256[] tokenIds) returns()
-func (_Contract *ContractSession) Initialize(owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.Initialize(&_Contract.TransactOpts, owners, tokenIds)
+func (_Token721 *Token721Session) Initialize(owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.Initialize(&_Token721.TransactOpts, owners, tokenIds)
 }
 
 // Initialize is a paid mutator transaction binding the contract method 0x7fbbe46f.
 //
 // Solidity: function initialize(address[] owners, uint256[] tokenIds) returns()
-func (_Contract *ContractTransactorSession) Initialize(owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.Initialize(&_Contract.TransactOpts, owners, tokenIds)
+func (_Token721 *Token721TransactorSession) Initialize(owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.Initialize(&_Token721.TransactOpts, owners, tokenIds)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Contract *ContractTransactor) RenounceOwnership(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "renounceOwnership")
+func (_Token721 *Token721Transactor) RenounceOwnership(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "renounceOwnership")
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Contract *ContractSession) RenounceOwnership() (*types.Transaction, error) {
-	return _Contract.Contract.RenounceOwnership(&_Contract.TransactOpts)
+func (_Token721 *Token721Session) RenounceOwnership() (*types.Transaction, error) {
+	return _Token721.Contract.RenounceOwnership(&_Token721.TransactOpts)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Contract *ContractTransactorSession) RenounceOwnership() (*types.Transaction, error) {
-	return _Contract.Contract.RenounceOwnership(&_Contract.TransactOpts)
+func (_Token721 *Token721TransactorSession) RenounceOwnership() (*types.Transaction, error) {
+	return _Token721.Contract.RenounceOwnership(&_Token721.TransactOpts)
 }
 
 // SafeTransferFrom is a paid mutator transaction binding the contract method 0x42842e0e.
 //
 // Solidity: function safeTransferFrom(address from, address to, uint256 tokenId) returns()
-func (_Contract *ContractTransactor) SafeTransferFrom(opts *bind.TransactOpts, from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "safeTransferFrom", from, to, tokenId)
+func (_Token721 *Token721Transactor) SafeTransferFrom(opts *bind.TransactOpts, from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "safeTransferFrom", from, to, tokenId)
 }
 
 // SafeTransferFrom is a paid mutator transaction binding the contract method 0x42842e0e.
 //
 // Solidity: function safeTransferFrom(address from, address to, uint256 tokenId) returns()
-func (_Contract *ContractSession) SafeTransferFrom(from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.SafeTransferFrom(&_Contract.TransactOpts, from, to, tokenId)
+func (_Token721 *Token721Session) SafeTransferFrom(from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.SafeTransferFrom(&_Token721.TransactOpts, from, to, tokenId)
 }
 
 // SafeTransferFrom is a paid mutator transaction binding the contract method 0x42842e0e.
 //
 // Solidity: function safeTransferFrom(address from, address to, uint256 tokenId) returns()
-func (_Contract *ContractTransactorSession) SafeTransferFrom(from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.SafeTransferFrom(&_Contract.TransactOpts, from, to, tokenId)
+func (_Token721 *Token721TransactorSession) SafeTransferFrom(from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.SafeTransferFrom(&_Token721.TransactOpts, from, to, tokenId)
 }
 
 // SafeTransferFrom0 is a paid mutator transaction binding the contract method 0xb88d4fde.
 //
 // Solidity: function safeTransferFrom(address from, address to, uint256 tokenId, bytes _data) returns()
-func (_Contract *ContractTransactor) SafeTransferFrom0(opts *bind.TransactOpts, from common.Address, to common.Address, tokenId *big.Int, _data []byte) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "safeTransferFrom0", from, to, tokenId, _data)
+func (_Token721 *Token721Transactor) SafeTransferFrom0(opts *bind.TransactOpts, from common.Address, to common.Address, tokenId *big.Int, _data []byte) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "safeTransferFrom0", from, to, tokenId, _data)
 }
 
 // SafeTransferFrom0 is a paid mutator transaction binding the contract method 0xb88d4fde.
 //
 // Solidity: function safeTransferFrom(address from, address to, uint256 tokenId, bytes _data) returns()
-func (_Contract *ContractSession) SafeTransferFrom0(from common.Address, to common.Address, tokenId *big.Int, _data []byte) (*types.Transaction, error) {
-	return _Contract.Contract.SafeTransferFrom0(&_Contract.TransactOpts, from, to, tokenId, _data)
+func (_Token721 *Token721Session) SafeTransferFrom0(from common.Address, to common.Address, tokenId *big.Int, _data []byte) (*types.Transaction, error) {
+	return _Token721.Contract.SafeTransferFrom0(&_Token721.TransactOpts, from, to, tokenId, _data)
 }
 
 // SafeTransferFrom0 is a paid mutator transaction binding the contract method 0xb88d4fde.
 //
 // Solidity: function safeTransferFrom(address from, address to, uint256 tokenId, bytes _data) returns()
-func (_Contract *ContractTransactorSession) SafeTransferFrom0(from common.Address, to common.Address, tokenId *big.Int, _data []byte) (*types.Transaction, error) {
-	return _Contract.Contract.SafeTransferFrom0(&_Contract.TransactOpts, from, to, tokenId, _data)
+func (_Token721 *Token721TransactorSession) SafeTransferFrom0(from common.Address, to common.Address, tokenId *big.Int, _data []byte) (*types.Transaction, error) {
+	return _Token721.Contract.SafeTransferFrom0(&_Token721.TransactOpts, from, to, tokenId, _data)
 }
 
 // SetApprovalForAll is a paid mutator transaction binding the contract method 0xa22cb465.
 //
 // Solidity: function setApprovalForAll(address operator, bool approved) returns()
-func (_Contract *ContractTransactor) SetApprovalForAll(opts *bind.TransactOpts, operator common.Address, approved bool) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "setApprovalForAll", operator, approved)
+func (_Token721 *Token721Transactor) SetApprovalForAll(opts *bind.TransactOpts, operator common.Address, approved bool) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "setApprovalForAll", operator, approved)
 }
 
 // SetApprovalForAll is a paid mutator transaction binding the contract method 0xa22cb465.
 //
 // Solidity: function setApprovalForAll(address operator, bool approved) returns()
-func (_Contract *ContractSession) SetApprovalForAll(operator common.Address, approved bool) (*types.Transaction, error) {
-	return _Contract.Contract.SetApprovalForAll(&_Contract.TransactOpts, operator, approved)
+func (_Token721 *Token721Session) SetApprovalForAll(operator common.Address, approved bool) (*types.Transaction, error) {
+	return _Token721.Contract.SetApprovalForAll(&_Token721.TransactOpts, operator, approved)
 }
 
 // SetApprovalForAll is a paid mutator transaction binding the contract method 0xa22cb465.
 //
 // Solidity: function setApprovalForAll(address operator, bool approved) returns()
-func (_Contract *ContractTransactorSession) SetApprovalForAll(operator common.Address, approved bool) (*types.Transaction, error) {
-	return _Contract.Contract.SetApprovalForAll(&_Contract.TransactOpts, operator, approved)
+func (_Token721 *Token721TransactorSession) SetApprovalForAll(operator common.Address, approved bool) (*types.Transaction, error) {
+	return _Token721.Contract.SetApprovalForAll(&_Token721.TransactOpts, operator, approved)
 }
 
 // SetBaseURI is a paid mutator transaction binding the contract method 0x55f804b3.
 //
 // Solidity: function setBaseURI(string baseURI_) returns()
-func (_Contract *ContractTransactor) SetBaseURI(opts *bind.TransactOpts, baseURI_ string) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "setBaseURI", baseURI_)
+func (_Token721 *Token721Transactor) SetBaseURI(opts *bind.TransactOpts, baseURI_ string) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "setBaseURI", baseURI_)
 }
 
 // SetBaseURI is a paid mutator transaction binding the contract method 0x55f804b3.
 //
 // Solidity: function setBaseURI(string baseURI_) returns()
-func (_Contract *ContractSession) SetBaseURI(baseURI_ string) (*types.Transaction, error) {
-	return _Contract.Contract.SetBaseURI(&_Contract.TransactOpts, baseURI_)
+func (_Token721 *Token721Session) SetBaseURI(baseURI_ string) (*types.Transaction, error) {
+	return _Token721.Contract.SetBaseURI(&_Token721.TransactOpts, baseURI_)
 }
 
 // SetBaseURI is a paid mutator transaction binding the contract method 0x55f804b3.
 //
 // Solidity: function setBaseURI(string baseURI_) returns()
-func (_Contract *ContractTransactorSession) SetBaseURI(baseURI_ string) (*types.Transaction, error) {
-	return _Contract.Contract.SetBaseURI(&_Contract.TransactOpts, baseURI_)
+func (_Token721 *Token721TransactorSession) SetBaseURI(baseURI_ string) (*types.Transaction, error) {
+	return _Token721.Contract.SetBaseURI(&_Token721.TransactOpts, baseURI_)
 }
 
 // TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
 //
 // Solidity: function transferFrom(address from, address to, uint256 tokenId) returns()
-func (_Contract *ContractTransactor) TransferFrom(opts *bind.TransactOpts, from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "transferFrom", from, to, tokenId)
+func (_Token721 *Token721Transactor) TransferFrom(opts *bind.TransactOpts, from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "transferFrom", from, to, tokenId)
 }
 
 // TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
 //
 // Solidity: function transferFrom(address from, address to, uint256 tokenId) returns()
-func (_Contract *ContractSession) TransferFrom(from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.TransferFrom(&_Contract.TransactOpts, from, to, tokenId)
+func (_Token721 *Token721Session) TransferFrom(from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.TransferFrom(&_Token721.TransactOpts, from, to, tokenId)
 }
 
 // TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
 //
 // Solidity: function transferFrom(address from, address to, uint256 tokenId) returns()
-func (_Contract *ContractTransactorSession) TransferFrom(from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.TransferFrom(&_Contract.TransactOpts, from, to, tokenId)
+func (_Token721 *Token721TransactorSession) TransferFrom(from common.Address, to common.Address, tokenId *big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.TransferFrom(&_Token721.TransactOpts, from, to, tokenId)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Contract *ContractTransactor) TransferOwnership(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "transferOwnership", newOwner)
+func (_Token721 *Token721Transactor) TransferOwnership(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "transferOwnership", newOwner)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Contract *ContractSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _Contract.Contract.TransferOwnership(&_Contract.TransactOpts, newOwner)
+func (_Token721 *Token721Session) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
+	return _Token721.Contract.TransferOwnership(&_Token721.TransactOpts, newOwner)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Contract *ContractTransactorSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _Contract.Contract.TransferOwnership(&_Contract.TransactOpts, newOwner)
+func (_Token721 *Token721TransactorSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
+	return _Token721.Contract.TransferOwnership(&_Token721.TransactOpts, newOwner)
 }
 
 // UpdateOwnership is a paid mutator transaction binding the contract method 0xb9380aaf.
 //
 // Solidity: function updateOwnership(address[] owners, uint256[] tokenIds) returns()
-func (_Contract *ContractTransactor) UpdateOwnership(opts *bind.TransactOpts, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "updateOwnership", owners, tokenIds)
+func (_Token721 *Token721Transactor) UpdateOwnership(opts *bind.TransactOpts, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _Token721.contract.Transact(opts, "updateOwnership", owners, tokenIds)
 }
 
 // UpdateOwnership is a paid mutator transaction binding the contract method 0xb9380aaf.
 //
 // Solidity: function updateOwnership(address[] owners, uint256[] tokenIds) returns()
-func (_Contract *ContractSession) UpdateOwnership(owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.UpdateOwnership(&_Contract.TransactOpts, owners, tokenIds)
+func (_Token721 *Token721Session) UpdateOwnership(owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.UpdateOwnership(&_Token721.TransactOpts, owners, tokenIds)
 }
 
 // UpdateOwnership is a paid mutator transaction binding the contract method 0xb9380aaf.
 //
 // Solidity: function updateOwnership(address[] owners, uint256[] tokenIds) returns()
-func (_Contract *ContractTransactorSession) UpdateOwnership(owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.UpdateOwnership(&_Contract.TransactOpts, owners, tokenIds)
+func (_Token721 *Token721TransactorSession) UpdateOwnership(owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _Token721.Contract.UpdateOwnership(&_Token721.TransactOpts, owners, tokenIds)
 }
 
-// ContractApprovalIterator is returned from FilterApproval and is used to iterate over the raw logs and unpacked data for Approval events raised by the Contract contract.
-type ContractApprovalIterator struct {
-	Event *ContractApproval // Event containing the contract specifics and raw log
+// Token721ApprovalIterator is returned from FilterApproval and is used to iterate over the raw logs and unpacked data for Approval events raised by the Token721 contract.
+type Token721ApprovalIterator struct {
+	Event *Token721Approval // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -808,7 +808,7 @@ type ContractApprovalIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *ContractApprovalIterator) Next() bool {
+func (it *Token721ApprovalIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -817,7 +817,7 @@ func (it *ContractApprovalIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(ContractApproval)
+			it.Event = new(Token721Approval)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -832,7 +832,7 @@ func (it *ContractApprovalIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(ContractApproval)
+		it.Event = new(Token721Approval)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -848,19 +848,19 @@ func (it *ContractApprovalIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *ContractApprovalIterator) Error() error {
+func (it *Token721ApprovalIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *ContractApprovalIterator) Close() error {
+func (it *Token721ApprovalIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// ContractApproval represents a Approval event raised by the Contract contract.
-type ContractApproval struct {
+// Token721Approval represents a Approval event raised by the Token721 contract.
+type Token721Approval struct {
 	Owner    common.Address
 	Approved common.Address
 	TokenId  *big.Int
@@ -870,7 +870,7 @@ type ContractApproval struct {
 // FilterApproval is a free log retrieval operation binding the contract event 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925.
 //
 // Solidity: event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)
-func (_Contract *ContractFilterer) FilterApproval(opts *bind.FilterOpts, owner []common.Address, approved []common.Address, tokenId []*big.Int) (*ContractApprovalIterator, error) {
+func (_Token721 *Token721Filterer) FilterApproval(opts *bind.FilterOpts, owner []common.Address, approved []common.Address, tokenId []*big.Int) (*Token721ApprovalIterator, error) {
 
 	var ownerRule []interface{}
 	for _, ownerItem := range owner {
@@ -885,17 +885,17 @@ func (_Contract *ContractFilterer) FilterApproval(opts *bind.FilterOpts, owner [
 		tokenIdRule = append(tokenIdRule, tokenIdItem)
 	}
 
-	logs, sub, err := _Contract.contract.FilterLogs(opts, "Approval", ownerRule, approvedRule, tokenIdRule)
+	logs, sub, err := _Token721.contract.FilterLogs(opts, "Approval", ownerRule, approvedRule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractApprovalIterator{contract: _Contract.contract, event: "Approval", logs: logs, sub: sub}, nil
+	return &Token721ApprovalIterator{contract: _Token721.contract, event: "Approval", logs: logs, sub: sub}, nil
 }
 
 // WatchApproval is a free log subscription operation binding the contract event 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925.
 //
 // Solidity: event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)
-func (_Contract *ContractFilterer) WatchApproval(opts *bind.WatchOpts, sink chan<- *ContractApproval, owner []common.Address, approved []common.Address, tokenId []*big.Int) (event.Subscription, error) {
+func (_Token721 *Token721Filterer) WatchApproval(opts *bind.WatchOpts, sink chan<- *Token721Approval, owner []common.Address, approved []common.Address, tokenId []*big.Int) (event.Subscription, error) {
 
 	var ownerRule []interface{}
 	for _, ownerItem := range owner {
@@ -910,7 +910,7 @@ func (_Contract *ContractFilterer) WatchApproval(opts *bind.WatchOpts, sink chan
 		tokenIdRule = append(tokenIdRule, tokenIdItem)
 	}
 
-	logs, sub, err := _Contract.contract.WatchLogs(opts, "Approval", ownerRule, approvedRule, tokenIdRule)
+	logs, sub, err := _Token721.contract.WatchLogs(opts, "Approval", ownerRule, approvedRule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
@@ -920,8 +920,8 @@ func (_Contract *ContractFilterer) WatchApproval(opts *bind.WatchOpts, sink chan
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(ContractApproval)
-				if err := _Contract.contract.UnpackLog(event, "Approval", log); err != nil {
+				event := new(Token721Approval)
+				if err := _Token721.contract.UnpackLog(event, "Approval", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -945,18 +945,18 @@ func (_Contract *ContractFilterer) WatchApproval(opts *bind.WatchOpts, sink chan
 // ParseApproval is a log parse operation binding the contract event 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925.
 //
 // Solidity: event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)
-func (_Contract *ContractFilterer) ParseApproval(log types.Log) (*ContractApproval, error) {
-	event := new(ContractApproval)
-	if err := _Contract.contract.UnpackLog(event, "Approval", log); err != nil {
+func (_Token721 *Token721Filterer) ParseApproval(log types.Log) (*Token721Approval, error) {
+	event := new(Token721Approval)
+	if err := _Token721.contract.UnpackLog(event, "Approval", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// ContractApprovalForAllIterator is returned from FilterApprovalForAll and is used to iterate over the raw logs and unpacked data for ApprovalForAll events raised by the Contract contract.
-type ContractApprovalForAllIterator struct {
-	Event *ContractApprovalForAll // Event containing the contract specifics and raw log
+// Token721ApprovalForAllIterator is returned from FilterApprovalForAll and is used to iterate over the raw logs and unpacked data for ApprovalForAll events raised by the Token721 contract.
+type Token721ApprovalForAllIterator struct {
+	Event *Token721ApprovalForAll // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -970,7 +970,7 @@ type ContractApprovalForAllIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *ContractApprovalForAllIterator) Next() bool {
+func (it *Token721ApprovalForAllIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -979,7 +979,7 @@ func (it *ContractApprovalForAllIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(ContractApprovalForAll)
+			it.Event = new(Token721ApprovalForAll)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -994,7 +994,7 @@ func (it *ContractApprovalForAllIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(ContractApprovalForAll)
+		it.Event = new(Token721ApprovalForAll)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -1010,19 +1010,19 @@ func (it *ContractApprovalForAllIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *ContractApprovalForAllIterator) Error() error {
+func (it *Token721ApprovalForAllIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *ContractApprovalForAllIterator) Close() error {
+func (it *Token721ApprovalForAllIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// ContractApprovalForAll represents a ApprovalForAll event raised by the Contract contract.
-type ContractApprovalForAll struct {
+// Token721ApprovalForAll represents a ApprovalForAll event raised by the Token721 contract.
+type Token721ApprovalForAll struct {
 	Owner    common.Address
 	Operator common.Address
 	Approved bool
@@ -1032,7 +1032,7 @@ type ContractApprovalForAll struct {
 // FilterApprovalForAll is a free log retrieval operation binding the contract event 0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31.
 //
 // Solidity: event ApprovalForAll(address indexed owner, address indexed operator, bool approved)
-func (_Contract *ContractFilterer) FilterApprovalForAll(opts *bind.FilterOpts, owner []common.Address, operator []common.Address) (*ContractApprovalForAllIterator, error) {
+func (_Token721 *Token721Filterer) FilterApprovalForAll(opts *bind.FilterOpts, owner []common.Address, operator []common.Address) (*Token721ApprovalForAllIterator, error) {
 
 	var ownerRule []interface{}
 	for _, ownerItem := range owner {
@@ -1043,17 +1043,17 @@ func (_Contract *ContractFilterer) FilterApprovalForAll(opts *bind.FilterOpts, o
 		operatorRule = append(operatorRule, operatorItem)
 	}
 
-	logs, sub, err := _Contract.contract.FilterLogs(opts, "ApprovalForAll", ownerRule, operatorRule)
+	logs, sub, err := _Token721.contract.FilterLogs(opts, "ApprovalForAll", ownerRule, operatorRule)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractApprovalForAllIterator{contract: _Contract.contract, event: "ApprovalForAll", logs: logs, sub: sub}, nil
+	return &Token721ApprovalForAllIterator{contract: _Token721.contract, event: "ApprovalForAll", logs: logs, sub: sub}, nil
 }
 
 // WatchApprovalForAll is a free log subscription operation binding the contract event 0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31.
 //
 // Solidity: event ApprovalForAll(address indexed owner, address indexed operator, bool approved)
-func (_Contract *ContractFilterer) WatchApprovalForAll(opts *bind.WatchOpts, sink chan<- *ContractApprovalForAll, owner []common.Address, operator []common.Address) (event.Subscription, error) {
+func (_Token721 *Token721Filterer) WatchApprovalForAll(opts *bind.WatchOpts, sink chan<- *Token721ApprovalForAll, owner []common.Address, operator []common.Address) (event.Subscription, error) {
 
 	var ownerRule []interface{}
 	for _, ownerItem := range owner {
@@ -1064,7 +1064,7 @@ func (_Contract *ContractFilterer) WatchApprovalForAll(opts *bind.WatchOpts, sin
 		operatorRule = append(operatorRule, operatorItem)
 	}
 
-	logs, sub, err := _Contract.contract.WatchLogs(opts, "ApprovalForAll", ownerRule, operatorRule)
+	logs, sub, err := _Token721.contract.WatchLogs(opts, "ApprovalForAll", ownerRule, operatorRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1074,8 +1074,8 @@ func (_Contract *ContractFilterer) WatchApprovalForAll(opts *bind.WatchOpts, sin
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(ContractApprovalForAll)
-				if err := _Contract.contract.UnpackLog(event, "ApprovalForAll", log); err != nil {
+				event := new(Token721ApprovalForAll)
+				if err := _Token721.contract.UnpackLog(event, "ApprovalForAll", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -1099,18 +1099,18 @@ func (_Contract *ContractFilterer) WatchApprovalForAll(opts *bind.WatchOpts, sin
 // ParseApprovalForAll is a log parse operation binding the contract event 0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31.
 //
 // Solidity: event ApprovalForAll(address indexed owner, address indexed operator, bool approved)
-func (_Contract *ContractFilterer) ParseApprovalForAll(log types.Log) (*ContractApprovalForAll, error) {
-	event := new(ContractApprovalForAll)
-	if err := _Contract.contract.UnpackLog(event, "ApprovalForAll", log); err != nil {
+func (_Token721 *Token721Filterer) ParseApprovalForAll(log types.Log) (*Token721ApprovalForAll, error) {
+	event := new(Token721ApprovalForAll)
+	if err := _Token721.contract.UnpackLog(event, "ApprovalForAll", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// ContractOwnershipTransferredIterator is returned from FilterOwnershipTransferred and is used to iterate over the raw logs and unpacked data for OwnershipTransferred events raised by the Contract contract.
-type ContractOwnershipTransferredIterator struct {
-	Event *ContractOwnershipTransferred // Event containing the contract specifics and raw log
+// Token721OwnershipTransferredIterator is returned from FilterOwnershipTransferred and is used to iterate over the raw logs and unpacked data for OwnershipTransferred events raised by the Token721 contract.
+type Token721OwnershipTransferredIterator struct {
+	Event *Token721OwnershipTransferred // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -1124,7 +1124,7 @@ type ContractOwnershipTransferredIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *ContractOwnershipTransferredIterator) Next() bool {
+func (it *Token721OwnershipTransferredIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -1133,7 +1133,7 @@ func (it *ContractOwnershipTransferredIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(ContractOwnershipTransferred)
+			it.Event = new(Token721OwnershipTransferred)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -1148,7 +1148,7 @@ func (it *ContractOwnershipTransferredIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(ContractOwnershipTransferred)
+		it.Event = new(Token721OwnershipTransferred)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -1164,19 +1164,19 @@ func (it *ContractOwnershipTransferredIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *ContractOwnershipTransferredIterator) Error() error {
+func (it *Token721OwnershipTransferredIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *ContractOwnershipTransferredIterator) Close() error {
+func (it *Token721OwnershipTransferredIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// ContractOwnershipTransferred represents a OwnershipTransferred event raised by the Contract contract.
-type ContractOwnershipTransferred struct {
+// Token721OwnershipTransferred represents a OwnershipTransferred event raised by the Token721 contract.
+type Token721OwnershipTransferred struct {
 	PreviousOwner common.Address
 	NewOwner      common.Address
 	Raw           types.Log // Blockchain specific contextual infos
@@ -1185,7 +1185,7 @@ type ContractOwnershipTransferred struct {
 // FilterOwnershipTransferred is a free log retrieval operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Contract *ContractFilterer) FilterOwnershipTransferred(opts *bind.FilterOpts, previousOwner []common.Address, newOwner []common.Address) (*ContractOwnershipTransferredIterator, error) {
+func (_Token721 *Token721Filterer) FilterOwnershipTransferred(opts *bind.FilterOpts, previousOwner []common.Address, newOwner []common.Address) (*Token721OwnershipTransferredIterator, error) {
 
 	var previousOwnerRule []interface{}
 	for _, previousOwnerItem := range previousOwner {
@@ -1196,17 +1196,17 @@ func (_Contract *ContractFilterer) FilterOwnershipTransferred(opts *bind.FilterO
 		newOwnerRule = append(newOwnerRule, newOwnerItem)
 	}
 
-	logs, sub, err := _Contract.contract.FilterLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
+	logs, sub, err := _Token721.contract.FilterLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractOwnershipTransferredIterator{contract: _Contract.contract, event: "OwnershipTransferred", logs: logs, sub: sub}, nil
+	return &Token721OwnershipTransferredIterator{contract: _Token721.contract, event: "OwnershipTransferred", logs: logs, sub: sub}, nil
 }
 
 // WatchOwnershipTransferred is a free log subscription operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Contract *ContractFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink chan<- *ContractOwnershipTransferred, previousOwner []common.Address, newOwner []common.Address) (event.Subscription, error) {
+func (_Token721 *Token721Filterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink chan<- *Token721OwnershipTransferred, previousOwner []common.Address, newOwner []common.Address) (event.Subscription, error) {
 
 	var previousOwnerRule []interface{}
 	for _, previousOwnerItem := range previousOwner {
@@ -1217,7 +1217,7 @@ func (_Contract *ContractFilterer) WatchOwnershipTransferred(opts *bind.WatchOpt
 		newOwnerRule = append(newOwnerRule, newOwnerItem)
 	}
 
-	logs, sub, err := _Contract.contract.WatchLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
+	logs, sub, err := _Token721.contract.WatchLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1227,8 +1227,8 @@ func (_Contract *ContractFilterer) WatchOwnershipTransferred(opts *bind.WatchOpt
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(ContractOwnershipTransferred)
-				if err := _Contract.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
+				event := new(Token721OwnershipTransferred)
+				if err := _Token721.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -1252,18 +1252,18 @@ func (_Contract *ContractFilterer) WatchOwnershipTransferred(opts *bind.WatchOpt
 // ParseOwnershipTransferred is a log parse operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Contract *ContractFilterer) ParseOwnershipTransferred(log types.Log) (*ContractOwnershipTransferred, error) {
-	event := new(ContractOwnershipTransferred)
-	if err := _Contract.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
+func (_Token721 *Token721Filterer) ParseOwnershipTransferred(log types.Log) (*Token721OwnershipTransferred, error) {
+	event := new(Token721OwnershipTransferred)
+	if err := _Token721.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// ContractTransferIterator is returned from FilterTransfer and is used to iterate over the raw logs and unpacked data for Transfer events raised by the Contract contract.
-type ContractTransferIterator struct {
-	Event *ContractTransfer // Event containing the contract specifics and raw log
+// Token721TransferIterator is returned from FilterTransfer and is used to iterate over the raw logs and unpacked data for Transfer events raised by the Token721 contract.
+type Token721TransferIterator struct {
+	Event *Token721Transfer // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -1277,7 +1277,7 @@ type ContractTransferIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *ContractTransferIterator) Next() bool {
+func (it *Token721TransferIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -1286,7 +1286,7 @@ func (it *ContractTransferIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(ContractTransfer)
+			it.Event = new(Token721Transfer)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -1301,7 +1301,7 @@ func (it *ContractTransferIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(ContractTransfer)
+		it.Event = new(Token721Transfer)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -1317,19 +1317,19 @@ func (it *ContractTransferIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *ContractTransferIterator) Error() error {
+func (it *Token721TransferIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *ContractTransferIterator) Close() error {
+func (it *Token721TransferIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// ContractTransfer represents a Transfer event raised by the Contract contract.
-type ContractTransfer struct {
+// Token721Transfer represents a Transfer event raised by the Token721 contract.
+type Token721Transfer struct {
 	From    common.Address
 	To      common.Address
 	TokenId *big.Int
@@ -1339,7 +1339,7 @@ type ContractTransfer struct {
 // FilterTransfer is a free log retrieval operation binding the contract event 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef.
 //
 // Solidity: event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
-func (_Contract *ContractFilterer) FilterTransfer(opts *bind.FilterOpts, from []common.Address, to []common.Address, tokenId []*big.Int) (*ContractTransferIterator, error) {
+func (_Token721 *Token721Filterer) FilterTransfer(opts *bind.FilterOpts, from []common.Address, to []common.Address, tokenId []*big.Int) (*Token721TransferIterator, error) {
 
 	var fromRule []interface{}
 	for _, fromItem := range from {
@@ -1354,17 +1354,17 @@ func (_Contract *ContractFilterer) FilterTransfer(opts *bind.FilterOpts, from []
 		tokenIdRule = append(tokenIdRule, tokenIdItem)
 	}
 
-	logs, sub, err := _Contract.contract.FilterLogs(opts, "Transfer", fromRule, toRule, tokenIdRule)
+	logs, sub, err := _Token721.contract.FilterLogs(opts, "Transfer", fromRule, toRule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractTransferIterator{contract: _Contract.contract, event: "Transfer", logs: logs, sub: sub}, nil
+	return &Token721TransferIterator{contract: _Token721.contract, event: "Transfer", logs: logs, sub: sub}, nil
 }
 
 // WatchTransfer is a free log subscription operation binding the contract event 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef.
 //
 // Solidity: event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
-func (_Contract *ContractFilterer) WatchTransfer(opts *bind.WatchOpts, sink chan<- *ContractTransfer, from []common.Address, to []common.Address, tokenId []*big.Int) (event.Subscription, error) {
+func (_Token721 *Token721Filterer) WatchTransfer(opts *bind.WatchOpts, sink chan<- *Token721Transfer, from []common.Address, to []common.Address, tokenId []*big.Int) (event.Subscription, error) {
 
 	var fromRule []interface{}
 	for _, fromItem := range from {
@@ -1379,7 +1379,7 @@ func (_Contract *ContractFilterer) WatchTransfer(opts *bind.WatchOpts, sink chan
 		tokenIdRule = append(tokenIdRule, tokenIdItem)
 	}
 
-	logs, sub, err := _Contract.contract.WatchLogs(opts, "Transfer", fromRule, toRule, tokenIdRule)
+	logs, sub, err := _Token721.contract.WatchLogs(opts, "Transfer", fromRule, toRule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1389,8 +1389,8 @@ func (_Contract *ContractFilterer) WatchTransfer(opts *bind.WatchOpts, sink chan
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(ContractTransfer)
-				if err := _Contract.contract.UnpackLog(event, "Transfer", log); err != nil {
+				event := new(Token721Transfer)
+				if err := _Token721.contract.UnpackLog(event, "Transfer", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -1414,9 +1414,9 @@ func (_Contract *ContractFilterer) WatchTransfer(opts *bind.WatchOpts, sink chan
 // ParseTransfer is a log parse operation binding the contract event 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef.
 //
 // Solidity: event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
-func (_Contract *ContractFilterer) ParseTransfer(log types.Log) (*ContractTransfer, error) {
-	event := new(ContractTransfer)
-	if err := _Contract.contract.UnpackLog(event, "Transfer", log); err != nil {
+func (_Token721 *Token721Filterer) ParseTransfer(log types.Log) (*Token721Transfer, error) {
+	event := new(Token721Transfer)
+	if err := _Token721.contract.UnpackLog(event, "Transfer", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

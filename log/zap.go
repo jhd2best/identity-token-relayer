@@ -8,6 +8,7 @@ import (
 	"identity-token-relayer/config"
 	"path/filepath"
 	"runtime"
+	"time"
 )
 
 var logger *zap.Logger
@@ -17,7 +18,8 @@ func init() {
 
 	sentryHook := zap.Hooks(func(entry zapcore.Entry) error {
 		if entry.Level == zapcore.ErrorLevel || entry.Level == zapcore.FatalLevel {
-			sentry.CaptureMessage(fmt.Sprintf("%s, Line No: %d :: %s", entry.Caller.File, entry.Caller.Line, entry.Message))
+			defer sentry.Flush(2 * time.Second)
+			sentry.CaptureMessage(fmt.Sprintf("%s\n%s", entry.Message, entry.Stack))
 		}
 		return nil
 	})
@@ -37,12 +39,28 @@ func init() {
 			}
 		}
 
+		// log to file
+		if config.Get().Debug.LogPath != "" {
+			developmentConfig.OutputPaths = []string{
+				config.Get().Debug.LogPath,
+			}
+		}
+
 		logger, err = developmentConfig.Build(sentryHook)
 		if err != nil {
 			panic(err)
 		}
 	} else {
-		logger, err = zap.NewProduction(sentryHook)
+		prodConfig := zap.NewProductionConfig()
+
+		// log to file
+		if config.Get().Debug.LogPath != "" {
+			prodConfig.OutputPaths = []string{
+				config.Get().Debug.LogPath,
+			}
+		}
+
+		logger, err = prodConfig.Build(sentryHook)
 		if err != nil {
 			panic(err)
 		}

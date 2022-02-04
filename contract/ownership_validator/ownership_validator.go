@@ -28,113 +28,113 @@ var (
 	_ = event.NewSubscription
 )
 
-// ContractMetaData contains all meta data concerning the Contract contract.
-var ContractMetaData = &bind.MetaData{
-	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"addrMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"version\",\"type\":\"uint256\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"}],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"contractIToken721\",\"name\":\"oneAddress\",\"type\":\"address\"}],\"name\":\"register\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"baseURI_\",\"type\":\"string\"}],\"name\":\"setBaseURI\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"}],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"}],\"name\":\"unregister\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"version\",\"type\":\"uint256\"}],\"name\":\"updateOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"versions\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+// OwnershipValidatorMetaData contains all meta data concerning the OwnershipValidator contract.
+var OwnershipValidatorMetaData = &bind.MetaData{
+	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"addrMap\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"}],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"contractIToken721\",\"name\":\"oneAddress\",\"type\":\"address\"}],\"name\":\"register\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"baseURI_\",\"type\":\"string\"}],\"name\":\"setBaseURI\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"}],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"}],\"name\":\"unregister\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"ethAddress\",\"type\":\"string\"},{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"tokenIds\",\"type\":\"uint256[]\"}],\"name\":\"updateOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
-// ContractABI is the input ABI used to generate the binding from.
-// Deprecated: Use ContractMetaData.ABI instead.
-var ContractABI = ContractMetaData.ABI
+// OwnershipValidatorABI is the input ABI used to generate the binding from.
+// Deprecated: Use OwnershipValidatorMetaData.ABI instead.
+var OwnershipValidatorABI = OwnershipValidatorMetaData.ABI
 
-// Contract is an auto generated Go binding around an Ethereum contract.
-type Contract struct {
-	ContractCaller     // Read-only binding to the contract
-	ContractTransactor // Write-only binding to the contract
-	ContractFilterer   // Log filterer for contract events
+// OwnershipValidator is an auto generated Go binding around an Ethereum contract.
+type OwnershipValidator struct {
+	OwnershipValidatorCaller     // Read-only binding to the contract
+	OwnershipValidatorTransactor // Write-only binding to the contract
+	OwnershipValidatorFilterer   // Log filterer for contract events
 }
 
-// ContractCaller is an auto generated read-only Go binding around an Ethereum contract.
-type ContractCaller struct {
+// OwnershipValidatorCaller is an auto generated read-only Go binding around an Ethereum contract.
+type OwnershipValidatorCaller struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractTransactor is an auto generated write-only Go binding around an Ethereum contract.
-type ContractTransactor struct {
+// OwnershipValidatorTransactor is an auto generated write-only Go binding around an Ethereum contract.
+type OwnershipValidatorTransactor struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
-type ContractFilterer struct {
+// OwnershipValidatorFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
+type OwnershipValidatorFilterer struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// ContractSession is an auto generated Go binding around an Ethereum contract,
+// OwnershipValidatorSession is an auto generated Go binding around an Ethereum contract,
 // with pre-set call and transact options.
-type ContractSession struct {
-	Contract     *Contract         // Generic contract binding to set the session for
-	CallOpts     bind.CallOpts     // Call options to use throughout this session
-	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
-}
-
-// ContractCallerSession is an auto generated read-only Go binding around an Ethereum contract,
-// with pre-set call options.
-type ContractCallerSession struct {
-	Contract *ContractCaller // Generic contract caller binding to set the session for
-	CallOpts bind.CallOpts   // Call options to use throughout this session
-}
-
-// ContractTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
-// with pre-set transact options.
-type ContractTransactorSession struct {
-	Contract     *ContractTransactor // Generic contract transactor binding to set the session for
+type OwnershipValidatorSession struct {
+	Contract     *OwnershipValidator // Generic contract binding to set the session for
+	CallOpts     bind.CallOpts       // Call options to use throughout this session
 	TransactOpts bind.TransactOpts   // Transaction auth options to use throughout this session
 }
 
-// ContractRaw is an auto generated low-level Go binding around an Ethereum contract.
-type ContractRaw struct {
-	Contract *Contract // Generic contract binding to access the raw methods on
+// OwnershipValidatorCallerSession is an auto generated read-only Go binding around an Ethereum contract,
+// with pre-set call options.
+type OwnershipValidatorCallerSession struct {
+	Contract *OwnershipValidatorCaller // Generic contract caller binding to set the session for
+	CallOpts bind.CallOpts             // Call options to use throughout this session
 }
 
-// ContractCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
-type ContractCallerRaw struct {
-	Contract *ContractCaller // Generic read-only contract binding to access the raw methods on
+// OwnershipValidatorTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
+// with pre-set transact options.
+type OwnershipValidatorTransactorSession struct {
+	Contract     *OwnershipValidatorTransactor // Generic contract transactor binding to set the session for
+	TransactOpts bind.TransactOpts             // Transaction auth options to use throughout this session
 }
 
-// ContractTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
-type ContractTransactorRaw struct {
-	Contract *ContractTransactor // Generic write-only contract binding to access the raw methods on
+// OwnershipValidatorRaw is an auto generated low-level Go binding around an Ethereum contract.
+type OwnershipValidatorRaw struct {
+	Contract *OwnershipValidator // Generic contract binding to access the raw methods on
 }
 
-// NewContract creates a new instance of Contract, bound to a specific deployed contract.
-func NewContract(address common.Address, backend bind.ContractBackend) (*Contract, error) {
-	contract, err := bindContract(address, backend, backend, backend)
+// OwnershipValidatorCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
+type OwnershipValidatorCallerRaw struct {
+	Contract *OwnershipValidatorCaller // Generic read-only contract binding to access the raw methods on
+}
+
+// OwnershipValidatorTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
+type OwnershipValidatorTransactorRaw struct {
+	Contract *OwnershipValidatorTransactor // Generic write-only contract binding to access the raw methods on
+}
+
+// NewOwnershipValidator creates a new instance of OwnershipValidator, bound to a specific deployed contract.
+func NewOwnershipValidator(address common.Address, backend bind.ContractBackend) (*OwnershipValidator, error) {
+	contract, err := bindOwnershipValidator(address, backend, backend, backend)
 	if err != nil {
 		return nil, err
 	}
-	return &Contract{ContractCaller: ContractCaller{contract: contract}, ContractTransactor: ContractTransactor{contract: contract}, ContractFilterer: ContractFilterer{contract: contract}}, nil
+	return &OwnershipValidator{OwnershipValidatorCaller: OwnershipValidatorCaller{contract: contract}, OwnershipValidatorTransactor: OwnershipValidatorTransactor{contract: contract}, OwnershipValidatorFilterer: OwnershipValidatorFilterer{contract: contract}}, nil
 }
 
-// NewContractCaller creates a new read-only instance of Contract, bound to a specific deployed contract.
-func NewContractCaller(address common.Address, caller bind.ContractCaller) (*ContractCaller, error) {
-	contract, err := bindContract(address, caller, nil, nil)
+// NewOwnershipValidatorCaller creates a new read-only instance of OwnershipValidator, bound to a specific deployed contract.
+func NewOwnershipValidatorCaller(address common.Address, caller bind.ContractCaller) (*OwnershipValidatorCaller, error) {
+	contract, err := bindOwnershipValidator(address, caller, nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractCaller{contract: contract}, nil
+	return &OwnershipValidatorCaller{contract: contract}, nil
 }
 
-// NewContractTransactor creates a new write-only instance of Contract, bound to a specific deployed contract.
-func NewContractTransactor(address common.Address, transactor bind.ContractTransactor) (*ContractTransactor, error) {
-	contract, err := bindContract(address, nil, transactor, nil)
+// NewOwnershipValidatorTransactor creates a new write-only instance of OwnershipValidator, bound to a specific deployed contract.
+func NewOwnershipValidatorTransactor(address common.Address, transactor bind.ContractTransactor) (*OwnershipValidatorTransactor, error) {
+	contract, err := bindOwnershipValidator(address, nil, transactor, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractTransactor{contract: contract}, nil
+	return &OwnershipValidatorTransactor{contract: contract}, nil
 }
 
-// NewContractFilterer creates a new log filterer instance of Contract, bound to a specific deployed contract.
-func NewContractFilterer(address common.Address, filterer bind.ContractFilterer) (*ContractFilterer, error) {
-	contract, err := bindContract(address, nil, nil, filterer)
+// NewOwnershipValidatorFilterer creates a new log filterer instance of OwnershipValidator, bound to a specific deployed contract.
+func NewOwnershipValidatorFilterer(address common.Address, filterer bind.ContractFilterer) (*OwnershipValidatorFilterer, error) {
+	contract, err := bindOwnershipValidator(address, nil, nil, filterer)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractFilterer{contract: contract}, nil
+	return &OwnershipValidatorFilterer{contract: contract}, nil
 }
 
-// bindContract binds a generic wrapper to an already deployed contract.
-func bindContract(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(ContractABI))
+// bindOwnershipValidator binds a generic wrapper to an already deployed contract.
+func bindOwnershipValidator(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
+	parsed, err := abi.JSON(strings.NewReader(OwnershipValidatorABI))
 	if err != nil {
 		return nil, err
 	}
@@ -145,46 +145,46 @@ func bindContract(address common.Address, caller bind.ContractCaller, transactor
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Contract *ContractRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Contract.Contract.ContractCaller.contract.Call(opts, result, method, params...)
+func (_OwnershipValidator *OwnershipValidatorRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _OwnershipValidator.Contract.OwnershipValidatorCaller.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Contract *ContractRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Contract.Contract.ContractTransactor.contract.Transfer(opts)
+func (_OwnershipValidator *OwnershipValidatorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.OwnershipValidatorTransactor.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Contract *ContractRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Contract.Contract.ContractTransactor.contract.Transact(opts, method, params...)
+func (_OwnershipValidator *OwnershipValidatorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.OwnershipValidatorTransactor.contract.Transact(opts, method, params...)
 }
 
 // Call invokes the (constant) contract method with params as input values and
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Contract *ContractCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Contract.Contract.contract.Call(opts, result, method, params...)
+func (_OwnershipValidator *OwnershipValidatorCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _OwnershipValidator.Contract.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Contract *ContractTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Contract.Contract.contract.Transfer(opts)
+func (_OwnershipValidator *OwnershipValidatorTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Contract *ContractTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Contract.Contract.contract.Transact(opts, method, params...)
+func (_OwnershipValidator *OwnershipValidatorTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.contract.Transact(opts, method, params...)
 }
 
 // AddrMap is a free data retrieval call binding the contract method 0xac87478a.
 //
 // Solidity: function addrMap(string ) view returns(address)
-func (_Contract *ContractCaller) AddrMap(opts *bind.CallOpts, arg0 string) (common.Address, error) {
+func (_OwnershipValidator *OwnershipValidatorCaller) AddrMap(opts *bind.CallOpts, arg0 string) (common.Address, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "addrMap", arg0)
+	err := _OwnershipValidator.contract.Call(opts, &out, "addrMap", arg0)
 
 	if err != nil {
 		return *new(common.Address), err
@@ -199,23 +199,23 @@ func (_Contract *ContractCaller) AddrMap(opts *bind.CallOpts, arg0 string) (comm
 // AddrMap is a free data retrieval call binding the contract method 0xac87478a.
 //
 // Solidity: function addrMap(string ) view returns(address)
-func (_Contract *ContractSession) AddrMap(arg0 string) (common.Address, error) {
-	return _Contract.Contract.AddrMap(&_Contract.CallOpts, arg0)
+func (_OwnershipValidator *OwnershipValidatorSession) AddrMap(arg0 string) (common.Address, error) {
+	return _OwnershipValidator.Contract.AddrMap(&_OwnershipValidator.CallOpts, arg0)
 }
 
 // AddrMap is a free data retrieval call binding the contract method 0xac87478a.
 //
 // Solidity: function addrMap(string ) view returns(address)
-func (_Contract *ContractCallerSession) AddrMap(arg0 string) (common.Address, error) {
-	return _Contract.Contract.AddrMap(&_Contract.CallOpts, arg0)
+func (_OwnershipValidator *OwnershipValidatorCallerSession) AddrMap(arg0 string) (common.Address, error) {
+	return _OwnershipValidator.Contract.AddrMap(&_OwnershipValidator.CallOpts, arg0)
 }
 
 // BalanceOf is a free data retrieval call binding the contract method 0x04031852.
 //
 // Solidity: function balanceOf(string ethAddress, address owner) view returns(uint256)
-func (_Contract *ContractCaller) BalanceOf(opts *bind.CallOpts, ethAddress string, owner common.Address) (*big.Int, error) {
+func (_OwnershipValidator *OwnershipValidatorCaller) BalanceOf(opts *bind.CallOpts, ethAddress string, owner common.Address) (*big.Int, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "balanceOf", ethAddress, owner)
+	err := _OwnershipValidator.contract.Call(opts, &out, "balanceOf", ethAddress, owner)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -230,23 +230,23 @@ func (_Contract *ContractCaller) BalanceOf(opts *bind.CallOpts, ethAddress strin
 // BalanceOf is a free data retrieval call binding the contract method 0x04031852.
 //
 // Solidity: function balanceOf(string ethAddress, address owner) view returns(uint256)
-func (_Contract *ContractSession) BalanceOf(ethAddress string, owner common.Address) (*big.Int, error) {
-	return _Contract.Contract.BalanceOf(&_Contract.CallOpts, ethAddress, owner)
+func (_OwnershipValidator *OwnershipValidatorSession) BalanceOf(ethAddress string, owner common.Address) (*big.Int, error) {
+	return _OwnershipValidator.Contract.BalanceOf(&_OwnershipValidator.CallOpts, ethAddress, owner)
 }
 
 // BalanceOf is a free data retrieval call binding the contract method 0x04031852.
 //
 // Solidity: function balanceOf(string ethAddress, address owner) view returns(uint256)
-func (_Contract *ContractCallerSession) BalanceOf(ethAddress string, owner common.Address) (*big.Int, error) {
-	return _Contract.Contract.BalanceOf(&_Contract.CallOpts, ethAddress, owner)
+func (_OwnershipValidator *OwnershipValidatorCallerSession) BalanceOf(ethAddress string, owner common.Address) (*big.Int, error) {
+	return _OwnershipValidator.Contract.BalanceOf(&_OwnershipValidator.CallOpts, ethAddress, owner)
 }
 
 // Name is a free data retrieval call binding the contract method 0x5b43bc99.
 //
 // Solidity: function name(string ethAddress) view returns(string)
-func (_Contract *ContractCaller) Name(opts *bind.CallOpts, ethAddress string) (string, error) {
+func (_OwnershipValidator *OwnershipValidatorCaller) Name(opts *bind.CallOpts, ethAddress string) (string, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "name", ethAddress)
+	err := _OwnershipValidator.contract.Call(opts, &out, "name", ethAddress)
 
 	if err != nil {
 		return *new(string), err
@@ -261,23 +261,23 @@ func (_Contract *ContractCaller) Name(opts *bind.CallOpts, ethAddress string) (s
 // Name is a free data retrieval call binding the contract method 0x5b43bc99.
 //
 // Solidity: function name(string ethAddress) view returns(string)
-func (_Contract *ContractSession) Name(ethAddress string) (string, error) {
-	return _Contract.Contract.Name(&_Contract.CallOpts, ethAddress)
+func (_OwnershipValidator *OwnershipValidatorSession) Name(ethAddress string) (string, error) {
+	return _OwnershipValidator.Contract.Name(&_OwnershipValidator.CallOpts, ethAddress)
 }
 
 // Name is a free data retrieval call binding the contract method 0x5b43bc99.
 //
 // Solidity: function name(string ethAddress) view returns(string)
-func (_Contract *ContractCallerSession) Name(ethAddress string) (string, error) {
-	return _Contract.Contract.Name(&_Contract.CallOpts, ethAddress)
+func (_OwnershipValidator *OwnershipValidatorCallerSession) Name(ethAddress string) (string, error) {
+	return _OwnershipValidator.Contract.Name(&_OwnershipValidator.CallOpts, ethAddress)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contract *ContractCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
+func (_OwnershipValidator *OwnershipValidatorCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "owner")
+	err := _OwnershipValidator.contract.Call(opts, &out, "owner")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -292,23 +292,23 @@ func (_Contract *ContractCaller) Owner(opts *bind.CallOpts) (common.Address, err
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contract *ContractSession) Owner() (common.Address, error) {
-	return _Contract.Contract.Owner(&_Contract.CallOpts)
+func (_OwnershipValidator *OwnershipValidatorSession) Owner() (common.Address, error) {
+	return _OwnershipValidator.Contract.Owner(&_OwnershipValidator.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Contract *ContractCallerSession) Owner() (common.Address, error) {
-	return _Contract.Contract.Owner(&_Contract.CallOpts)
+func (_OwnershipValidator *OwnershipValidatorCallerSession) Owner() (common.Address, error) {
+	return _OwnershipValidator.Contract.Owner(&_OwnershipValidator.CallOpts)
 }
 
 // OwnerOf is a free data retrieval call binding the contract method 0x915622c1.
 //
 // Solidity: function ownerOf(string ethAddress, uint256 tokenId) view returns(address)
-func (_Contract *ContractCaller) OwnerOf(opts *bind.CallOpts, ethAddress string, tokenId *big.Int) (common.Address, error) {
+func (_OwnershipValidator *OwnershipValidatorCaller) OwnerOf(opts *bind.CallOpts, ethAddress string, tokenId *big.Int) (common.Address, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "ownerOf", ethAddress, tokenId)
+	err := _OwnershipValidator.contract.Call(opts, &out, "ownerOf", ethAddress, tokenId)
 
 	if err != nil {
 		return *new(common.Address), err
@@ -323,23 +323,23 @@ func (_Contract *ContractCaller) OwnerOf(opts *bind.CallOpts, ethAddress string,
 // OwnerOf is a free data retrieval call binding the contract method 0x915622c1.
 //
 // Solidity: function ownerOf(string ethAddress, uint256 tokenId) view returns(address)
-func (_Contract *ContractSession) OwnerOf(ethAddress string, tokenId *big.Int) (common.Address, error) {
-	return _Contract.Contract.OwnerOf(&_Contract.CallOpts, ethAddress, tokenId)
+func (_OwnershipValidator *OwnershipValidatorSession) OwnerOf(ethAddress string, tokenId *big.Int) (common.Address, error) {
+	return _OwnershipValidator.Contract.OwnerOf(&_OwnershipValidator.CallOpts, ethAddress, tokenId)
 }
 
 // OwnerOf is a free data retrieval call binding the contract method 0x915622c1.
 //
 // Solidity: function ownerOf(string ethAddress, uint256 tokenId) view returns(address)
-func (_Contract *ContractCallerSession) OwnerOf(ethAddress string, tokenId *big.Int) (common.Address, error) {
-	return _Contract.Contract.OwnerOf(&_Contract.CallOpts, ethAddress, tokenId)
+func (_OwnershipValidator *OwnershipValidatorCallerSession) OwnerOf(ethAddress string, tokenId *big.Int) (common.Address, error) {
+	return _OwnershipValidator.Contract.OwnerOf(&_OwnershipValidator.CallOpts, ethAddress, tokenId)
 }
 
 // Symbol is a free data retrieval call binding the contract method 0x41bb0559.
 //
 // Solidity: function symbol(string ethAddress) view returns(string)
-func (_Contract *ContractCaller) Symbol(opts *bind.CallOpts, ethAddress string) (string, error) {
+func (_OwnershipValidator *OwnershipValidatorCaller) Symbol(opts *bind.CallOpts, ethAddress string) (string, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "symbol", ethAddress)
+	err := _OwnershipValidator.contract.Call(opts, &out, "symbol", ethAddress)
 
 	if err != nil {
 		return *new(string), err
@@ -354,23 +354,23 @@ func (_Contract *ContractCaller) Symbol(opts *bind.CallOpts, ethAddress string) 
 // Symbol is a free data retrieval call binding the contract method 0x41bb0559.
 //
 // Solidity: function symbol(string ethAddress) view returns(string)
-func (_Contract *ContractSession) Symbol(ethAddress string) (string, error) {
-	return _Contract.Contract.Symbol(&_Contract.CallOpts, ethAddress)
+func (_OwnershipValidator *OwnershipValidatorSession) Symbol(ethAddress string) (string, error) {
+	return _OwnershipValidator.Contract.Symbol(&_OwnershipValidator.CallOpts, ethAddress)
 }
 
 // Symbol is a free data retrieval call binding the contract method 0x41bb0559.
 //
 // Solidity: function symbol(string ethAddress) view returns(string)
-func (_Contract *ContractCallerSession) Symbol(ethAddress string) (string, error) {
-	return _Contract.Contract.Symbol(&_Contract.CallOpts, ethAddress)
+func (_OwnershipValidator *OwnershipValidatorCallerSession) Symbol(ethAddress string) (string, error) {
+	return _OwnershipValidator.Contract.Symbol(&_OwnershipValidator.CallOpts, ethAddress)
 }
 
 // TokenURI is a free data retrieval call binding the contract method 0x9b330cb9.
 //
 // Solidity: function tokenURI(string ethAddress, uint256 tokenId) view returns(string)
-func (_Contract *ContractCaller) TokenURI(opts *bind.CallOpts, ethAddress string, tokenId *big.Int) (string, error) {
+func (_OwnershipValidator *OwnershipValidatorCaller) TokenURI(opts *bind.CallOpts, ethAddress string, tokenId *big.Int) (string, error) {
 	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "tokenURI", ethAddress, tokenId)
+	err := _OwnershipValidator.contract.Call(opts, &out, "tokenURI", ethAddress, tokenId)
 
 	if err != nil {
 		return *new(string), err
@@ -385,198 +385,167 @@ func (_Contract *ContractCaller) TokenURI(opts *bind.CallOpts, ethAddress string
 // TokenURI is a free data retrieval call binding the contract method 0x9b330cb9.
 //
 // Solidity: function tokenURI(string ethAddress, uint256 tokenId) view returns(string)
-func (_Contract *ContractSession) TokenURI(ethAddress string, tokenId *big.Int) (string, error) {
-	return _Contract.Contract.TokenURI(&_Contract.CallOpts, ethAddress, tokenId)
+func (_OwnershipValidator *OwnershipValidatorSession) TokenURI(ethAddress string, tokenId *big.Int) (string, error) {
+	return _OwnershipValidator.Contract.TokenURI(&_OwnershipValidator.CallOpts, ethAddress, tokenId)
 }
 
 // TokenURI is a free data retrieval call binding the contract method 0x9b330cb9.
 //
 // Solidity: function tokenURI(string ethAddress, uint256 tokenId) view returns(string)
-func (_Contract *ContractCallerSession) TokenURI(ethAddress string, tokenId *big.Int) (string, error) {
-	return _Contract.Contract.TokenURI(&_Contract.CallOpts, ethAddress, tokenId)
+func (_OwnershipValidator *OwnershipValidatorCallerSession) TokenURI(ethAddress string, tokenId *big.Int) (string, error) {
+	return _OwnershipValidator.Contract.TokenURI(&_OwnershipValidator.CallOpts, ethAddress, tokenId)
 }
 
-// Versions is a free data retrieval call binding the contract method 0x5107f348.
+// Initialize is a paid mutator transaction binding the contract method 0x24f3ae78.
 //
-// Solidity: function versions(string ) view returns(uint256)
-func (_Contract *ContractCaller) Versions(opts *bind.CallOpts, arg0 string) (*big.Int, error) {
-	var out []interface{}
-	err := _Contract.contract.Call(opts, &out, "versions", arg0)
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
+// Solidity: function initialize(string ethAddress, address[] owners, uint256[] tokenIds) returns()
+func (_OwnershipValidator *OwnershipValidatorTransactor) Initialize(opts *bind.TransactOpts, ethAddress string, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _OwnershipValidator.contract.Transact(opts, "initialize", ethAddress, owners, tokenIds)
 }
 
-// Versions is a free data retrieval call binding the contract method 0x5107f348.
+// Initialize is a paid mutator transaction binding the contract method 0x24f3ae78.
 //
-// Solidity: function versions(string ) view returns(uint256)
-func (_Contract *ContractSession) Versions(arg0 string) (*big.Int, error) {
-	return _Contract.Contract.Versions(&_Contract.CallOpts, arg0)
+// Solidity: function initialize(string ethAddress, address[] owners, uint256[] tokenIds) returns()
+func (_OwnershipValidator *OwnershipValidatorSession) Initialize(ethAddress string, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.Initialize(&_OwnershipValidator.TransactOpts, ethAddress, owners, tokenIds)
 }
 
-// Versions is a free data retrieval call binding the contract method 0x5107f348.
+// Initialize is a paid mutator transaction binding the contract method 0x24f3ae78.
 //
-// Solidity: function versions(string ) view returns(uint256)
-func (_Contract *ContractCallerSession) Versions(arg0 string) (*big.Int, error) {
-	return _Contract.Contract.Versions(&_Contract.CallOpts, arg0)
-}
-
-// Initialize is a paid mutator transaction binding the contract method 0xed9ce47f.
-//
-// Solidity: function initialize(string ethAddress, address[] owners, uint256[] tokenIds, uint256 version) returns()
-func (_Contract *ContractTransactor) Initialize(opts *bind.TransactOpts, ethAddress string, owners []common.Address, tokenIds []*big.Int, version *big.Int) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "initialize", ethAddress, owners, tokenIds, version)
-}
-
-// Initialize is a paid mutator transaction binding the contract method 0xed9ce47f.
-//
-// Solidity: function initialize(string ethAddress, address[] owners, uint256[] tokenIds, uint256 version) returns()
-func (_Contract *ContractSession) Initialize(ethAddress string, owners []common.Address, tokenIds []*big.Int, version *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.Initialize(&_Contract.TransactOpts, ethAddress, owners, tokenIds, version)
-}
-
-// Initialize is a paid mutator transaction binding the contract method 0xed9ce47f.
-//
-// Solidity: function initialize(string ethAddress, address[] owners, uint256[] tokenIds, uint256 version) returns()
-func (_Contract *ContractTransactorSession) Initialize(ethAddress string, owners []common.Address, tokenIds []*big.Int, version *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.Initialize(&_Contract.TransactOpts, ethAddress, owners, tokenIds, version)
+// Solidity: function initialize(string ethAddress, address[] owners, uint256[] tokenIds) returns()
+func (_OwnershipValidator *OwnershipValidatorTransactorSession) Initialize(ethAddress string, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.Initialize(&_OwnershipValidator.TransactOpts, ethAddress, owners, tokenIds)
 }
 
 // Register is a paid mutator transaction binding the contract method 0x1e59c529.
 //
 // Solidity: function register(string ethAddress, address oneAddress) returns()
-func (_Contract *ContractTransactor) Register(opts *bind.TransactOpts, ethAddress string, oneAddress common.Address) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "register", ethAddress, oneAddress)
+func (_OwnershipValidator *OwnershipValidatorTransactor) Register(opts *bind.TransactOpts, ethAddress string, oneAddress common.Address) (*types.Transaction, error) {
+	return _OwnershipValidator.contract.Transact(opts, "register", ethAddress, oneAddress)
 }
 
 // Register is a paid mutator transaction binding the contract method 0x1e59c529.
 //
 // Solidity: function register(string ethAddress, address oneAddress) returns()
-func (_Contract *ContractSession) Register(ethAddress string, oneAddress common.Address) (*types.Transaction, error) {
-	return _Contract.Contract.Register(&_Contract.TransactOpts, ethAddress, oneAddress)
+func (_OwnershipValidator *OwnershipValidatorSession) Register(ethAddress string, oneAddress common.Address) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.Register(&_OwnershipValidator.TransactOpts, ethAddress, oneAddress)
 }
 
 // Register is a paid mutator transaction binding the contract method 0x1e59c529.
 //
 // Solidity: function register(string ethAddress, address oneAddress) returns()
-func (_Contract *ContractTransactorSession) Register(ethAddress string, oneAddress common.Address) (*types.Transaction, error) {
-	return _Contract.Contract.Register(&_Contract.TransactOpts, ethAddress, oneAddress)
+func (_OwnershipValidator *OwnershipValidatorTransactorSession) Register(ethAddress string, oneAddress common.Address) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.Register(&_OwnershipValidator.TransactOpts, ethAddress, oneAddress)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Contract *ContractTransactor) RenounceOwnership(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "renounceOwnership")
+func (_OwnershipValidator *OwnershipValidatorTransactor) RenounceOwnership(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _OwnershipValidator.contract.Transact(opts, "renounceOwnership")
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Contract *ContractSession) RenounceOwnership() (*types.Transaction, error) {
-	return _Contract.Contract.RenounceOwnership(&_Contract.TransactOpts)
+func (_OwnershipValidator *OwnershipValidatorSession) RenounceOwnership() (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.RenounceOwnership(&_OwnershipValidator.TransactOpts)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Contract *ContractTransactorSession) RenounceOwnership() (*types.Transaction, error) {
-	return _Contract.Contract.RenounceOwnership(&_Contract.TransactOpts)
+func (_OwnershipValidator *OwnershipValidatorTransactorSession) RenounceOwnership() (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.RenounceOwnership(&_OwnershipValidator.TransactOpts)
 }
 
 // SetBaseURI is a paid mutator transaction binding the contract method 0x6790a9de.
 //
 // Solidity: function setBaseURI(string ethAddress, string baseURI_) returns()
-func (_Contract *ContractTransactor) SetBaseURI(opts *bind.TransactOpts, ethAddress string, baseURI_ string) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "setBaseURI", ethAddress, baseURI_)
+func (_OwnershipValidator *OwnershipValidatorTransactor) SetBaseURI(opts *bind.TransactOpts, ethAddress string, baseURI_ string) (*types.Transaction, error) {
+	return _OwnershipValidator.contract.Transact(opts, "setBaseURI", ethAddress, baseURI_)
 }
 
 // SetBaseURI is a paid mutator transaction binding the contract method 0x6790a9de.
 //
 // Solidity: function setBaseURI(string ethAddress, string baseURI_) returns()
-func (_Contract *ContractSession) SetBaseURI(ethAddress string, baseURI_ string) (*types.Transaction, error) {
-	return _Contract.Contract.SetBaseURI(&_Contract.TransactOpts, ethAddress, baseURI_)
+func (_OwnershipValidator *OwnershipValidatorSession) SetBaseURI(ethAddress string, baseURI_ string) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.SetBaseURI(&_OwnershipValidator.TransactOpts, ethAddress, baseURI_)
 }
 
 // SetBaseURI is a paid mutator transaction binding the contract method 0x6790a9de.
 //
 // Solidity: function setBaseURI(string ethAddress, string baseURI_) returns()
-func (_Contract *ContractTransactorSession) SetBaseURI(ethAddress string, baseURI_ string) (*types.Transaction, error) {
-	return _Contract.Contract.SetBaseURI(&_Contract.TransactOpts, ethAddress, baseURI_)
+func (_OwnershipValidator *OwnershipValidatorTransactorSession) SetBaseURI(ethAddress string, baseURI_ string) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.SetBaseURI(&_OwnershipValidator.TransactOpts, ethAddress, baseURI_)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Contract *ContractTransactor) TransferOwnership(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "transferOwnership", newOwner)
+func (_OwnershipValidator *OwnershipValidatorTransactor) TransferOwnership(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
+	return _OwnershipValidator.contract.Transact(opts, "transferOwnership", newOwner)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Contract *ContractSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _Contract.Contract.TransferOwnership(&_Contract.TransactOpts, newOwner)
+func (_OwnershipValidator *OwnershipValidatorSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.TransferOwnership(&_OwnershipValidator.TransactOpts, newOwner)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Contract *ContractTransactorSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _Contract.Contract.TransferOwnership(&_Contract.TransactOpts, newOwner)
+func (_OwnershipValidator *OwnershipValidatorTransactorSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.TransferOwnership(&_OwnershipValidator.TransactOpts, newOwner)
 }
 
 // Unregister is a paid mutator transaction binding the contract method 0x6598a1ae.
 //
 // Solidity: function unregister(string ethAddress) returns()
-func (_Contract *ContractTransactor) Unregister(opts *bind.TransactOpts, ethAddress string) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "unregister", ethAddress)
+func (_OwnershipValidator *OwnershipValidatorTransactor) Unregister(opts *bind.TransactOpts, ethAddress string) (*types.Transaction, error) {
+	return _OwnershipValidator.contract.Transact(opts, "unregister", ethAddress)
 }
 
 // Unregister is a paid mutator transaction binding the contract method 0x6598a1ae.
 //
 // Solidity: function unregister(string ethAddress) returns()
-func (_Contract *ContractSession) Unregister(ethAddress string) (*types.Transaction, error) {
-	return _Contract.Contract.Unregister(&_Contract.TransactOpts, ethAddress)
+func (_OwnershipValidator *OwnershipValidatorSession) Unregister(ethAddress string) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.Unregister(&_OwnershipValidator.TransactOpts, ethAddress)
 }
 
 // Unregister is a paid mutator transaction binding the contract method 0x6598a1ae.
 //
 // Solidity: function unregister(string ethAddress) returns()
-func (_Contract *ContractTransactorSession) Unregister(ethAddress string) (*types.Transaction, error) {
-	return _Contract.Contract.Unregister(&_Contract.TransactOpts, ethAddress)
+func (_OwnershipValidator *OwnershipValidatorTransactorSession) Unregister(ethAddress string) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.Unregister(&_OwnershipValidator.TransactOpts, ethAddress)
 }
 
-// UpdateOwnership is a paid mutator transaction binding the contract method 0x4943166e.
+// UpdateOwnership is a paid mutator transaction binding the contract method 0x7ff35e0c.
 //
-// Solidity: function updateOwnership(string ethAddress, address[] owners, uint256[] tokenIds, uint256 version) returns()
-func (_Contract *ContractTransactor) UpdateOwnership(opts *bind.TransactOpts, ethAddress string, owners []common.Address, tokenIds []*big.Int, version *big.Int) (*types.Transaction, error) {
-	return _Contract.contract.Transact(opts, "updateOwnership", ethAddress, owners, tokenIds, version)
+// Solidity: function updateOwnership(string ethAddress, address[] owners, uint256[] tokenIds) returns()
+func (_OwnershipValidator *OwnershipValidatorTransactor) UpdateOwnership(opts *bind.TransactOpts, ethAddress string, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _OwnershipValidator.contract.Transact(opts, "updateOwnership", ethAddress, owners, tokenIds)
 }
 
-// UpdateOwnership is a paid mutator transaction binding the contract method 0x4943166e.
+// UpdateOwnership is a paid mutator transaction binding the contract method 0x7ff35e0c.
 //
-// Solidity: function updateOwnership(string ethAddress, address[] owners, uint256[] tokenIds, uint256 version) returns()
-func (_Contract *ContractSession) UpdateOwnership(ethAddress string, owners []common.Address, tokenIds []*big.Int, version *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.UpdateOwnership(&_Contract.TransactOpts, ethAddress, owners, tokenIds, version)
+// Solidity: function updateOwnership(string ethAddress, address[] owners, uint256[] tokenIds) returns()
+func (_OwnershipValidator *OwnershipValidatorSession) UpdateOwnership(ethAddress string, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.UpdateOwnership(&_OwnershipValidator.TransactOpts, ethAddress, owners, tokenIds)
 }
 
-// UpdateOwnership is a paid mutator transaction binding the contract method 0x4943166e.
+// UpdateOwnership is a paid mutator transaction binding the contract method 0x7ff35e0c.
 //
-// Solidity: function updateOwnership(string ethAddress, address[] owners, uint256[] tokenIds, uint256 version) returns()
-func (_Contract *ContractTransactorSession) UpdateOwnership(ethAddress string, owners []common.Address, tokenIds []*big.Int, version *big.Int) (*types.Transaction, error) {
-	return _Contract.Contract.UpdateOwnership(&_Contract.TransactOpts, ethAddress, owners, tokenIds, version)
+// Solidity: function updateOwnership(string ethAddress, address[] owners, uint256[] tokenIds) returns()
+func (_OwnershipValidator *OwnershipValidatorTransactorSession) UpdateOwnership(ethAddress string, owners []common.Address, tokenIds []*big.Int) (*types.Transaction, error) {
+	return _OwnershipValidator.Contract.UpdateOwnership(&_OwnershipValidator.TransactOpts, ethAddress, owners, tokenIds)
 }
 
-// ContractOwnershipTransferredIterator is returned from FilterOwnershipTransferred and is used to iterate over the raw logs and unpacked data for OwnershipTransferred events raised by the Contract contract.
-type ContractOwnershipTransferredIterator struct {
-	Event *ContractOwnershipTransferred // Event containing the contract specifics and raw log
+// OwnershipValidatorOwnershipTransferredIterator is returned from FilterOwnershipTransferred and is used to iterate over the raw logs and unpacked data for OwnershipTransferred events raised by the OwnershipValidator contract.
+type OwnershipValidatorOwnershipTransferredIterator struct {
+	Event *OwnershipValidatorOwnershipTransferred // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -590,7 +559,7 @@ type ContractOwnershipTransferredIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *ContractOwnershipTransferredIterator) Next() bool {
+func (it *OwnershipValidatorOwnershipTransferredIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -599,7 +568,7 @@ func (it *ContractOwnershipTransferredIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(ContractOwnershipTransferred)
+			it.Event = new(OwnershipValidatorOwnershipTransferred)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -614,7 +583,7 @@ func (it *ContractOwnershipTransferredIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(ContractOwnershipTransferred)
+		it.Event = new(OwnershipValidatorOwnershipTransferred)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -630,19 +599,19 @@ func (it *ContractOwnershipTransferredIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *ContractOwnershipTransferredIterator) Error() error {
+func (it *OwnershipValidatorOwnershipTransferredIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *ContractOwnershipTransferredIterator) Close() error {
+func (it *OwnershipValidatorOwnershipTransferredIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// ContractOwnershipTransferred represents a OwnershipTransferred event raised by the Contract contract.
-type ContractOwnershipTransferred struct {
+// OwnershipValidatorOwnershipTransferred represents a OwnershipTransferred event raised by the OwnershipValidator contract.
+type OwnershipValidatorOwnershipTransferred struct {
 	PreviousOwner common.Address
 	NewOwner      common.Address
 	Raw           types.Log // Blockchain specific contextual infos
@@ -651,7 +620,7 @@ type ContractOwnershipTransferred struct {
 // FilterOwnershipTransferred is a free log retrieval operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Contract *ContractFilterer) FilterOwnershipTransferred(opts *bind.FilterOpts, previousOwner []common.Address, newOwner []common.Address) (*ContractOwnershipTransferredIterator, error) {
+func (_OwnershipValidator *OwnershipValidatorFilterer) FilterOwnershipTransferred(opts *bind.FilterOpts, previousOwner []common.Address, newOwner []common.Address) (*OwnershipValidatorOwnershipTransferredIterator, error) {
 
 	var previousOwnerRule []interface{}
 	for _, previousOwnerItem := range previousOwner {
@@ -662,17 +631,17 @@ func (_Contract *ContractFilterer) FilterOwnershipTransferred(opts *bind.FilterO
 		newOwnerRule = append(newOwnerRule, newOwnerItem)
 	}
 
-	logs, sub, err := _Contract.contract.FilterLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
+	logs, sub, err := _OwnershipValidator.contract.FilterLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
 	if err != nil {
 		return nil, err
 	}
-	return &ContractOwnershipTransferredIterator{contract: _Contract.contract, event: "OwnershipTransferred", logs: logs, sub: sub}, nil
+	return &OwnershipValidatorOwnershipTransferredIterator{contract: _OwnershipValidator.contract, event: "OwnershipTransferred", logs: logs, sub: sub}, nil
 }
 
 // WatchOwnershipTransferred is a free log subscription operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Contract *ContractFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink chan<- *ContractOwnershipTransferred, previousOwner []common.Address, newOwner []common.Address) (event.Subscription, error) {
+func (_OwnershipValidator *OwnershipValidatorFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink chan<- *OwnershipValidatorOwnershipTransferred, previousOwner []common.Address, newOwner []common.Address) (event.Subscription, error) {
 
 	var previousOwnerRule []interface{}
 	for _, previousOwnerItem := range previousOwner {
@@ -683,7 +652,7 @@ func (_Contract *ContractFilterer) WatchOwnershipTransferred(opts *bind.WatchOpt
 		newOwnerRule = append(newOwnerRule, newOwnerItem)
 	}
 
-	logs, sub, err := _Contract.contract.WatchLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
+	logs, sub, err := _OwnershipValidator.contract.WatchLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
 	if err != nil {
 		return nil, err
 	}
@@ -693,8 +662,8 @@ func (_Contract *ContractFilterer) WatchOwnershipTransferred(opts *bind.WatchOpt
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(ContractOwnershipTransferred)
-				if err := _Contract.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
+				event := new(OwnershipValidatorOwnershipTransferred)
+				if err := _OwnershipValidator.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -718,9 +687,9 @@ func (_Contract *ContractFilterer) WatchOwnershipTransferred(opts *bind.WatchOpt
 // ParseOwnershipTransferred is a log parse operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Contract *ContractFilterer) ParseOwnershipTransferred(log types.Log) (*ContractOwnershipTransferred, error) {
-	event := new(ContractOwnershipTransferred)
-	if err := _Contract.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
+func (_OwnershipValidator *OwnershipValidatorFilterer) ParseOwnershipTransferred(log types.Log) (*OwnershipValidatorOwnershipTransferred, error) {
+	event := new(OwnershipValidatorOwnershipTransferred)
+	if err := _OwnershipValidator.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

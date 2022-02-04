@@ -4,6 +4,7 @@ import (
 	"cloud.google.com/go/firestore"
 	"context"
 	"errors"
+	"fmt"
 	"go.uber.org/zap"
 	"google.golang.org/api/iterator"
 	. "identity-token-relayer/common"
@@ -19,13 +20,15 @@ type Transaction struct {
 	TokenId         int64  `firestore:"token_id"`
 	FromAddress     string `firestore:"from_address"`
 	ToAddress       string `firestore:"to_address"`
-	Status          string `firestore:"status"` // created, mapping, success, failed, skipped
+	Status          string `firestore:"status"` // created, mapping, error, success, failed, skipped
+	RetryTimes      int64  `firestore:"retry_times"`
 	CreatedAt       string `firestore:"created_at"`
 	UpdatedAt       string `firestore:"updated_at"`
 }
 
-func GetTransactionByHash(hash string) (trans Transaction, err error) {
-	data, err := GetDbClient().Collection("transactions").Doc(hash).Get(context.Background())
+func GetOneTransaction(hash string, address string, tokenId int64) (trans Transaction, err error) {
+	docName := fmt.Sprintf("%s-%s-%d", hash, address[34:41], tokenId)
+	data, err := GetDbClient().Collection("transactions").Doc(docName).Get(context.Background())
 	if err != nil {
 		return
 	}
@@ -59,7 +62,8 @@ func GetTransactionByStatus(status string) ([]Transaction, error) {
 }
 
 func CreateTransaction(trans Transaction) error {
-	ref := GetDbClient().Collection("transactions").Doc(trans.TxHash)
+	docName := fmt.Sprintf("%s-%s-%d", trans.TxHash, trans.ContractAddress[34:41], trans.TokenId)
+	ref := GetDbClient().Collection("transactions").Doc(docName)
 	err := GetDbClient().RunTransaction(context.Background(), func(ctx context.Context, tx *firestore.Transaction) error {
 		_, getErr := tx.Get(ref)
 		if getErr == nil {
@@ -81,7 +85,8 @@ func BatchCreateTransactions(trans []Transaction) ([]string, error) {
 
 	for _, tran := range trans {
 		addedTxHash = append(addedTxHash, tran.TxHash)
-		docRef := GetDbClient().Collection("transactions").Doc(tran.TxHash)
+		docName := fmt.Sprintf("%s-%s-%d", tran.TxHash, tran.ContractAddress[34:41], tran.TokenId)
+		docRef := GetDbClient().Collection("transactions").Doc(docName)
 		batch.Set(docRef, tran)
 	}
 
@@ -92,8 +97,31 @@ func BatchCreateTransactions(trans []Transaction) ([]string, error) {
 	return addedTxHash, nil
 }
 
-func SetTransactionStatusMapping(txHash string, mappingTxHash string) error {
-	_, updateErr := GetDbClient().Collection("transactions").Doc(txHash).Update(context.Background(), []firestore.Update{
+func BatchUpdateTransactions(trans []Transaction, data []firestore.Update) ([]string, error) {
+	if len(trans) > 500 {
+		return nil, errors.New("batch update can not more 500 items")
+	}
+
+	updatedTransactionTxHash := make([]string, 0)
+	batch := GetDbClient().Batch()
+
+	for _, tran := range trans {
+		updatedTransactionTxHash = append(updatedTransactionTxHash, tran.TxHash)
+		docName := fmt.Sprintf("%s-%s-%d", tran.TxHash, tran.ContractAddress[34:41], tran.TokenId)
+		sfRef := GetDbClient().Collection("transactions").Doc(docName)
+		batch.Update(sfRef, data)
+	}
+
+	_, commitErr := batch.Commit(context.Background())
+	if commitErr != nil {
+		return nil, commitErr
+	}
+	return updatedTransactionTxHash, nil
+}
+
+func SetTransactionStatusMapping(txHash string, address string, tokenId int64, mappingTxHash string) error {
+	docName := fmt.Sprintf("%s-%s-%d", txHash, address[34:41], tokenId)
+	_, updateErr := GetDbClient().Collection("transactions").Doc(docName).Update(context.Background(), []firestore.Update{
 		{
 			Path:  "status",
 			Value: "mapping",
@@ -108,8 +136,26 @@ func SetTransactionStatusMapping(txHash string, mappingTxHash string) error {
 	return updateErr
 }
 
-func SetTransactionStatus(txHash string, status string) error {
-	_, updateErr := GetDbClient().Collection("transactions").Doc(txHash).Update(context.Background(), []firestore.Update{
+func SetTransactionStatusError(txHash string, address string, tokenId int64, retryTimes int64) error {
+	docName := fmt.Sprintf("%s-%s-%d", txHash, address[34:41], tokenId)
+	_, updateErr := GetDbClient().Collection("transactions").Doc(docName).Update(context.Background(), []firestore.Update{
+		{
+			Path:  "status",
+			Value: "error",
+		}, {
+			Path:  "retry_times",
+			Value: retryTimes,
+		}, {
+			Path:  "updated_at",
+			Value: time.Now().Format(TimeLayout),
+		},
+	})
+	return updateErr
+}
+
+func SetTransactionStatus(txHash string, address string, tokenId int64, status string) error {
+	docName := fmt.Sprintf("%s-%s-%d", txHash, address[34:41], tokenId)
+	_, updateErr := GetDbClient().Collection("transactions").Doc(docName).Update(context.Background(), []firestore.Update{
 		{
 			Path:  "status",
 			Value: status,
