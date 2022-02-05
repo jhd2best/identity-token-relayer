@@ -1,0 +1,34 @@
+---
+- hosts: '{{ inventory }}'
+  vars:
+    binary_path: '../relayer'
+    network: 'testnet'
+
+  tasks:
+    - name: copy app configuration files
+      copy:
+        src: '{{ item.src }}'
+        dest: '/home/{{ ansible_user }}/{{ item.dest }}'
+      with_items:
+        - { src: '{{ network }}/config.yaml', dest: 'config.yaml' }
+        - { src: '{{ network }}/firebase-service-account.json', dest: 'firebase-service-account.json' }
+        - { src: '{{ network }}/harmony.key', dest: 'harmony.key' }
+
+    - name: reload systemd configuration and start relayer
+      systemd:
+        state: restarted
+        name: identity-token-relayer
+
+    - name: "wait 10 seconds for configuration loaded"
+      pause:
+        seconds: 10
+
+    - name: clear secret files
+      ignore_errors: yes
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - '/home/{{ ansible_user }}/config.yaml'
+        - '/home/{{ ansible_user }}/firebase-service-account.json'
+        - '/home/{{ ansible_user }}/harmony.key'

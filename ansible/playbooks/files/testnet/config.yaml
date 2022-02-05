@@ -1,0 +1,18 @@
+Debug:
+  Verbose: true
+  LogPath: ./run.log
+  DisableCron: true
+  DisableSentry: true
+  SentryDSN:
+Db:
+  ServiceAccountPath: ./firebase-service-account.json
+Aws:
+  Profile: mainnet
+  Region: us-west-2
+Eth:
+  RpcEndpoints: https://kovan.infura.io/v3
+Hmy:
+  RpcEndpoints: https://api.s0.b.hmny.io
+  PrivateKeyPath: ./harmony-testnet.key
+  OpenKMS: false
+  OwnershipValidatorAddress: 0xa3dADE79C0303F04108F13eeae5510Ef0674c6C7

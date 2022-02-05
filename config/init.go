@@ -29,6 +29,7 @@ func init() {
 	config = Config{
 		Debug: &DebugConfig{
 			Verbose:       false,
+			LogPath:       "",
 			DisableCron:   false,
 			DisableSentry: false,
 			SentryDSN:     "",
@@ -38,15 +39,15 @@ func init() {
 		},
 		Aws: &AwsConfig{
 			Profile: "mainnet",
-			Region: "us-west-2",
+			Region:  "us-west-2",
 		},
 		Eth: &EthConfig{
-			RpcEndpoints: "",
+			RpcEndpoints: "https://kovan.infura.io/v3",
 		},
 		Hmy: &HmyConfig{
-			RpcEndpoints: "https://api.harmony.one",
-			PrivateKeyPath: "",
-			OpenKMS: false,
+			RpcEndpoints:              "https://api.s0.b.hmny.io",
+			PrivateKeyPath:            "./harmony-testnet.key",
+			OpenKMS:                   false,
 			OwnershipValidatorAddress: "",
 		},
 	}

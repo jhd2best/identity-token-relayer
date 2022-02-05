@@ -1,0 +1,7 @@
+---
+- hosts: '{{ inventory }}'
+  tasks:
+    - name: reload systemd configuration and start relayer
+      systemd:
+        state: stopped
+        name: identity-token-relayer

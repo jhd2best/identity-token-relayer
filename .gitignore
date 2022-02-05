@@ -21,3 +21,5 @@
 /main
 *_test.go
 /relayer
+.DS_Store
+/ansible/.vaultpass
