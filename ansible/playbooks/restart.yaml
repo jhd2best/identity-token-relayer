@@ -1,7 +1,6 @@
 ---
 - hosts: '{{ inventory }}'
   vars:
-    binary_path: '../relayer'
     network: 'testnet'
 
   tasks:
