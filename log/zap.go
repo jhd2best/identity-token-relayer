@@ -8,7 +8,6 @@ import (
 	"identity-token-relayer/config"
 	"path/filepath"
 	"runtime"
-	"time"
 )
 
 var logger *zap.Logger
@@ -17,9 +16,11 @@ func init() {
 	var err error
 
 	sentryHook := zap.Hooks(func(entry zapcore.Entry) error {
-		if entry.Level == zapcore.ErrorLevel || entry.Level == zapcore.FatalLevel {
-			defer sentry.Flush(2 * time.Second)
-			sentry.CaptureMessage(fmt.Sprintf("%s\n%s", entry.Message, entry.Stack))
+		if entry.Level == zapcore.FatalLevel || entry.Level == zapcore.ErrorLevel {
+			sentry.WithScope(func(scope *sentry.Scope) {
+				scope.SetLevel(sentry.LevelError)
+				sentry.CaptureMessage(fmt.Sprintf("%s\n%s", entry.Message, entry.Stack))
+			})
 		}
 		return nil
 	})

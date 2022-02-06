@@ -5,6 +5,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/getsentry/sentry-go"
 	"go.uber.org/zap"
 	. "identity-token-relayer/common"
 	"identity-token-relayer/eth"
@@ -45,19 +46,33 @@ func SendMappingTransaction() {
 			// check nft last block height
 			nft, nftErr := model.GetProjectNftByTokenId(tran.ContractAddress, tran.TokenId)
 			if nftErr != nil {
-				log.GetLogger().Error("nft not found. try to auto-create it. ",
+				sentry.WithScope(func(scope *sentry.Scope) {
+					scope.SetContext("data", map[string]interface{}{
+						"contract_address": tran.ContractAddress,
+						"token_id":         tran.TokenId,
+					})
+					scope.SetLevel(sentry.LevelWarning)
+					sentry.CaptureMessage("nft not found. try to auto-create it.")
+				})
+
+				log.GetLogger().Warn("nft not found. try to auto-create it.",
 					zap.String("error", nftErr.Error()),
-					zap.String("contract_address", tran.ContractAddress),
-					zap.Int64("token_id", tran.TokenId),
 				)
 
 				// sync nft from chain
 				syncErr := eth.SyncOneErc721TokenOnChain(tran.ContractAddress, tran.TokenId, tran.BlockHeight, true)
 				if syncErr != nil {
-					log.GetLogger().Error("sync nft from chain failed.",
+					sentry.WithScope(func(scope *sentry.Scope) {
+						scope.SetContext("data", map[string]interface{}{
+							"contract_address": tran.ContractAddress,
+							"token_id":         tran.TokenId,
+						})
+						scope.SetLevel(sentry.LevelError)
+						sentry.CaptureMessage("sync nft from chain failed.")
+					})
+
+					log.GetLogger().Warn("sync nft from chain failed.",
 						zap.String("error", syncErr.Error()),
-						zap.String("contract_address", tran.ContractAddress),
-						zap.Int64("token_id", tran.TokenId),
 					)
 					continue
 				}
@@ -65,9 +80,16 @@ func SendMappingTransaction() {
 				// skip the transaction
 				skipErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "skipped")
 				if skipErr != nil {
-					log.GetLogger().Error("skip trans failed.",
+					sentry.WithScope(func(scope *sentry.Scope) {
+						scope.SetContext("data", map[string]interface{}{
+							"tx_hash": tran.TxHash,
+						})
+						scope.SetLevel(sentry.LevelError)
+						sentry.CaptureMessage("skip trans failed.")
+					})
+
+					log.GetLogger().Warn("skip trans failed.",
 						zap.String("error", skipErr.Error()),
-						zap.String("tx_hash", tran.TxHash),
 					)
 				}
 				continue
@@ -76,9 +98,16 @@ func SendMappingTransaction() {
 			if nft.LastUpdateHeight >= tran.BlockHeight {
 				skipErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "skipped")
 				if skipErr != nil {
-					log.GetLogger().Error("skip trans failed.",
+					sentry.WithScope(func(scope *sentry.Scope) {
+						scope.SetContext("data", map[string]interface{}{
+							"tx_hash": tran.TxHash,
+						})
+						scope.SetLevel(sentry.LevelError)
+						sentry.CaptureMessage("skip trans failed.")
+					})
+
+					log.GetLogger().Warn("skip trans failed.",
 						zap.String("error", skipErr.Error()),
-						zap.String("tx_hash", tran.TxHash),
 					)
 				}
 				continue
@@ -87,9 +116,17 @@ func SendMappingTransaction() {
 			// exec transaction on harmony
 			mappingTxHash, execErr := execOwnerUpdateOnHarmony(tran)
 			if execErr != nil {
-				log.GetLogger().Error("exec transaction on harmony failed.",
+				sentry.WithScope(func(scope *sentry.Scope) {
+					scope.SetContext("data", map[string]interface{}{
+						"tx_hash":       tran.TxHash,
+						"harmony_error": execErr.Error(),
+					})
+					scope.SetLevel(sentry.LevelError)
+					sentry.CaptureMessage("exec transaction on harmony failed.")
+				})
+
+				log.GetLogger().Warn("exec transaction on harmony failed.",
 					zap.String("error", execErr.Error()),
-					zap.String("tx_hash", tran.TxHash),
 				)
 				continue
 			}
@@ -97,9 +134,16 @@ func SendMappingTransaction() {
 			// update transaction status
 			setErr := model.SetTransactionStatusMapping(tran.TxHash, tran.ContractAddress, tran.TokenId, mappingTxHash)
 			if setErr != nil {
-				log.GetLogger().Error("update transaction status to mapping failed.",
+				sentry.WithScope(func(scope *sentry.Scope) {
+					scope.SetContext("data", map[string]interface{}{
+						"tx_hash": tran.TxHash,
+					})
+					scope.SetLevel(sentry.LevelError)
+					sentry.CaptureMessage("update transaction status to mapping failed.")
+				})
+
+				log.GetLogger().Warn("update transaction status to mapping failed.",
 					zap.String("error", setErr.Error()),
-					zap.String("tx_hash", tran.TxHash),
 				)
 				continue
 			}
@@ -131,10 +175,17 @@ func RetryErrorTransaction() {
 			// check nft last block height
 			nft, nftErr := model.GetProjectNftByTokenId(tran.ContractAddress, tran.TokenId)
 			if nftErr != nil {
-				log.GetLogger().Error("nft not found.",
+				sentry.WithScope(func(scope *sentry.Scope) {
+					scope.SetContext("data", map[string]interface{}{
+						"contract_address": tran.ContractAddress,
+						"token_id":         tran.TokenId,
+					})
+					scope.SetLevel(sentry.LevelWarning)
+					sentry.CaptureMessage("nft not found.")
+				})
+
+				log.GetLogger().Warn("nft not found.",
 					zap.String("error", nftErr.Error()),
-					zap.String("contract_address", tran.ContractAddress),
-					zap.Int64("token_id", tran.TokenId),
 				)
 				continue
 			}
@@ -142,9 +193,16 @@ func RetryErrorTransaction() {
 			if nft.LastUpdateHeight >= tran.BlockHeight {
 				skipErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "skipped")
 				if skipErr != nil {
-					log.GetLogger().Error("skip trans failed.",
+					sentry.WithScope(func(scope *sentry.Scope) {
+						scope.SetContext("data", map[string]interface{}{
+							"tx_hash": tran.TxHash,
+						})
+						scope.SetLevel(sentry.LevelError)
+						sentry.CaptureMessage("skip trans failed.")
+					})
+
+					log.GetLogger().Warn("skip trans failed.",
 						zap.String("error", skipErr.Error()),
-						zap.String("tx_hash", tran.TxHash),
 					)
 				}
 				continue
@@ -153,9 +211,17 @@ func RetryErrorTransaction() {
 			// exec transaction on harmony
 			mappingTxHash, execErr := execOwnerUpdateOnHarmony(tran)
 			if execErr != nil {
-				log.GetLogger().Error("exec transaction on harmony failed.",
+				sentry.WithScope(func(scope *sentry.Scope) {
+					scope.SetContext("data", map[string]interface{}{
+						"tx_hash":       tran.TxHash,
+						"harmony_error": execErr.Error(),
+					})
+					scope.SetLevel(sentry.LevelError)
+					sentry.CaptureMessage("exec transaction on harmony failed.")
+				})
+
+				log.GetLogger().Warn("exec transaction on harmony failed.",
 					zap.String("error", execErr.Error()),
-					zap.String("tx_hash", tran.TxHash),
 				)
 				continue
 			}
@@ -163,9 +229,16 @@ func RetryErrorTransaction() {
 			// update transaction status
 			setErr := model.SetTransactionStatusMapping(tran.TxHash, tran.ContractAddress, tran.TokenId, mappingTxHash)
 			if setErr != nil {
-				log.GetLogger().Error("update transaction status to mapping failed.",
+				sentry.WithScope(func(scope *sentry.Scope) {
+					scope.SetContext("data", map[string]interface{}{
+						"tx_hash": tran.TxHash,
+					})
+					scope.SetLevel(sentry.LevelError)
+					sentry.CaptureMessage("update transaction status to mapping failed.")
+				})
+
+				log.GetLogger().Warn("update transaction status to mapping failed.",
 					zap.String("error", setErr.Error()),
-					zap.String("tx_hash", tran.TxHash),
 				)
 				continue
 			}
@@ -201,7 +274,15 @@ func CheckMappingTransaction() {
 				// get mapping trans receipt
 				receipt, recErr := hmy.GetHmyClient().TransactionReceipt(common.HexToHash(tran.MappingTxHash))
 				if recErr != nil {
-					log.GetLogger().Error("get mapping trans receipt failed.", zap.String("error", recErr.Error()), zap.String("mapping_hash", tran.MappingTxHash))
+					sentry.WithScope(func(scope *sentry.Scope) {
+						scope.SetContext("data", map[string]interface{}{
+							"mapping_hash": tran.MappingTxHash,
+						})
+						scope.SetLevel(sentry.LevelError)
+						sentry.CaptureMessage("get mapping trans receipt failed.")
+					})
+
+					log.GetLogger().Warn("get mapping trans receipt failed.", zap.String("error", recErr.Error()))
 					continue
 				}
 
@@ -209,16 +290,31 @@ func CheckMappingTransaction() {
 				if receipt.Status == 1 {
 					setErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "success")
 					if setErr != nil {
-						log.GetLogger().Error("set trans final status failed.", zap.String("error", setErr.Error()), zap.String("hash", tran.TxHash))
+						sentry.WithScope(func(scope *sentry.Scope) {
+							scope.SetContext("data", map[string]interface{}{
+								"tx_hash": tran.TxHash,
+							})
+							scope.SetLevel(sentry.LevelError)
+							sentry.CaptureMessage("set trans final status failed.")
+						})
+
+						log.GetLogger().Warn("set trans final status failed.", zap.String("error", setErr.Error()))
 						continue
 					}
 
 					// update nft new owner
 					updateNftErr := model.UpdateProjectNftOwner(tran.ContractAddress, tran.TokenId, tran.ToAddress, tran.BlockHeight)
 					if updateNftErr != nil {
-						log.GetLogger().Error("update project nft owner failed.",
+						sentry.WithScope(func(scope *sentry.Scope) {
+							scope.SetContext("data", map[string]interface{}{
+								"tx_hash": tran.TxHash,
+							})
+							scope.SetLevel(sentry.LevelError)
+							sentry.CaptureMessage("update project nft owner failed.")
+						})
+
+						log.GetLogger().Warn("update project nft owner failed.",
 							zap.String("error", updateNftErr.Error()),
-							zap.String("tx_hash", tran.TxHash),
 						)
 					}
 				} else {
@@ -226,17 +322,41 @@ func CheckMappingTransaction() {
 						tran.RetryTimes++
 						setErr := model.SetTransactionStatusError(tran.TxHash, tran.ContractAddress, tran.TokenId, tran.RetryTimes)
 						if setErr != nil {
-							log.GetLogger().Error("set trans error status failed.", zap.String("error", setErr.Error()), zap.String("hash", tran.TxHash))
+							sentry.WithScope(func(scope *sentry.Scope) {
+								scope.SetContext("data", map[string]interface{}{
+									"tx_hash": tran.TxHash,
+								})
+								scope.SetLevel(sentry.LevelError)
+								sentry.CaptureMessage("set trans error status failed.")
+							})
+
+							log.GetLogger().Warn("set trans error status failed.", zap.String("error", setErr.Error()))
 							continue
 						}
 					} else {
 						setErr := model.SetTransactionStatus(tran.TxHash, tran.ContractAddress, tran.TokenId, "failed")
 						if setErr != nil {
-							log.GetLogger().Error("set trans final status failed.", zap.String("error", setErr.Error()), zap.String("hash", tran.TxHash))
+							sentry.WithScope(func(scope *sentry.Scope) {
+								scope.SetContext("data", map[string]interface{}{
+									"tx_hash": tran.TxHash,
+								})
+								scope.SetLevel(sentry.LevelError)
+								sentry.CaptureMessage("set trans final status failed.")
+							})
+
+							log.GetLogger().Warn("set trans final status failed.", zap.String("error", setErr.Error()))
 							continue
 						}
 					}
-					log.GetLogger().Info("found error trans.", zap.String("hash", tran.TxHash))
+
+					sentry.WithScope(func(scope *sentry.Scope) {
+						scope.SetContext("data", map[string]interface{}{
+							"tx_hash": tran.TxHash,
+							"retry_times": tran.RetryTimes,
+						})
+						scope.SetLevel(sentry.LevelWarning)
+						sentry.CaptureMessage("found error trans.")
+					})
 				}
 				log.GetLogger().Info("set trans final status success.", zap.String("hash", tran.TxHash))
 			}

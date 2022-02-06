@@ -4,12 +4,14 @@ import (
 	"context"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/getsentry/sentry-go"
 	"go.uber.org/zap"
 	. "identity-token-relayer/common"
 	"identity-token-relayer/eth"
 	"identity-token-relayer/log"
 	"identity-token-relayer/model"
 	"math/big"
+	"strings"
 	"time"
 )
 
@@ -28,7 +30,7 @@ var (
 func GetEnableProject() {
 	syncErr := model.SyncAllEnableProjects()
 	if syncErr != nil {
-		log.GetLogger().Fatal("sync projects failed.", zap.String("error", syncErr.Error()))
+		log.GetLogger().Error("sync projects failed.", zap.String("error", syncErr.Error()))
 	}
 	log.GetLogger().Info("sync projects success")
 }
@@ -119,7 +121,14 @@ func GetEthTransaction() {
 			if createErr != nil {
 				// add to pending list
 				pendingTransaction = append(pendingTransaction, trans)
-				log.GetLogger().Error("create transaction logs failed.", zap.String("error", createErr.Error()), zap.String("tx_hash", trans.TxHash))
+				sentry.WithScope(func(scope *sentry.Scope) {
+					scope.SetContext("data", map[string]interface{}{
+						"tx_hash": trans.TxHash,
+					})
+					scope.SetLevel(sentry.LevelError)
+					sentry.CaptureMessage("create transaction logs failed.")
+				})
+				log.GetLogger().Warn("create transaction logs failed.", zap.String("error", createErr.Error()))
 				continue
 			}
 			log.GetLogger().Info("create transaction success", zap.String("tx_hash", trans.TxHash))
@@ -146,7 +155,23 @@ func HandlePendingTransaction() {
 
 	_, createErr := model.BatchCreateTransactions(pendingTransaction)
 	if createErr != nil {
-		log.GetLogger().Error("batch re-create pending transaction logs failed.", zap.String("error", createErr.Error()))
+		sentry.WithScope(func(scope *sentry.Scope) {
+			scope.SetContext("data", map[string]interface{}{
+				"count": len(pendingTransaction),
+			})
+			scope.SetLevel(sentry.LevelError)
+			sentry.CaptureMessage("batch re-create pending transaction logs failed.")
+		})
+
+		// get failed transaction hash
+		failedTransactionHash := make([]string, 0)
+		for _, tran := range pendingTransaction {
+			failedTransactionHash = append(failedTransactionHash, tran.TxHash)
+		}
+		log.GetLogger().Warn("batch re-create pending transaction logs failed.",
+			zap.String("error", createErr.Error()),
+			zap.String("failed_tx_hash", strings.Join(failedTransactionHash, " / ")),
+		)
 		return
 	}
 	log.GetLogger().Info("batch re-create pending transaction logs success.")
