@@ -1,0 +1,19 @@
+[Unit]
+Description=identity token relayer service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User={{ ansible_user }}
+WorkingDirectory=/home/{{ ansible_user }}
+ExecStart=/home/{{ ansible_user }}/relayer
+StandardError=syslog
+SyslogIdentifier=identity-token-relayer
+StartLimitInterval=0
+LimitNOFILE=65536
+LimitNPROC=65536
+
+[Install]
+WantedBy=multi-user.target
