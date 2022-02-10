@@ -149,6 +149,8 @@ func SendMappingTransaction() {
 			}
 
 			log.GetLogger().Info("update transaction status to mapping success", zap.String("tx_hash", tran.TxHash))
+
+			time.Sleep(500*time.Millisecond)
 		}
 	}
 }
@@ -244,6 +246,8 @@ func RetryErrorTransaction() {
 			}
 
 			log.GetLogger().Info("update transaction status to mapping success", zap.String("tx_hash", tran.TxHash))
+
+			time.Sleep(500*time.Millisecond)
 		}
 	}
 }
