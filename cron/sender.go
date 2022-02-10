@@ -286,7 +286,25 @@ func CheckMappingTransaction() {
 						sentry.CaptureMessage("get mapping trans receipt failed.")
 					})
 
-					log.GetLogger().Warn("get mapping trans receipt failed.", zap.String("error", recErr.Error()))
+					// if exceed more than 5 mins set transaction error
+					if time.Now().Sub(tranUpdatedTime) > 5 * time.Minute {
+						tran.RetryTimes++
+						setErr := model.SetTransactionStatusError(tran.TxHash, tran.ContractAddress, tran.TokenId, tran.RetryTimes)
+						if setErr != nil {
+							sentry.WithScope(func(scope *sentry.Scope) {
+								scope.SetContext("data", map[string]interface{}{
+									"tx_hash": tran.TxHash,
+								})
+								scope.SetLevel(sentry.LevelError)
+								sentry.CaptureMessage("set trans error status failed.")
+							})
+
+							log.GetLogger().Warn("set trans error status failed.", zap.String("error", setErr.Error()))
+							continue
+						}
+					} else {
+						log.GetLogger().Warn("get mapping trans receipt failed. will retry after 1min", zap.String("error", recErr.Error()))
+					}
 					continue
 				}
 
@@ -378,6 +396,9 @@ func execOwnerUpdateOnHarmony(tran model.Transaction) (hash string, err error) {
 		gasPrice, err := hmy.GetHmyClient().SuggestGasPrice(context.Background())
 		if err != nil {
 			return "", err
+		}
+		if gasPrice.Int64() < 40000000000 {
+			gasPrice = big.NewInt(40000000000)
 		}
 
 		chainId, err := hmy.GetHmyClient().NetworkID(context.Background())
