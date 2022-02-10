@@ -29,6 +29,10 @@ see [runbook](https://docs.harmony.one/home/network/wallets/harmony-cli/create-i
 
 #### pre-deploy
 
+deploy the `OwnershipValidator.sol` in this [repo](https://github.com/harmony-one/contract-libs/tree/main/contracts) on
+Harmony and update the `OwnershipValidatorAddress` field in `config.yaml`. do not forget init NFT owner data and transfer
+the owner of contract to your Harmony wallet which private key set in `config.yaml`
+
 place your `firebase` and `harmony` related files under `ansible/playbooks/files/<netwokr>` folder, and replace
 the `firebase-service-account.json` and `harmony-testnet.key`.
 

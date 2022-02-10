@@ -19,7 +19,6 @@
 /*.key
 /local_import
 /main
-*_test.go
 /relayer
 .DS_Store
 /ansible/.vaultpass
