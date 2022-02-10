@@ -1,2 +1,2 @@
 [relayer-backend]
-127.0.0.1 ansible_user=ubuntu
+34.207.116.206 ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/harmony-testnet.pem
