@@ -35,7 +35,7 @@ func SendMappingTransaction() {
 	}()
 
 	// get created transactions
-	trans, getErr := model.GetTransactionByStatus("created")
+	trans, getErr := model.GetTransactionByStatus("created", 10)
 	if getErr != nil {
 		log.GetLogger().Error("get created transactions failed.", zap.String("error", getErr.Error()))
 		return
@@ -150,7 +150,7 @@ func SendMappingTransaction() {
 
 			log.GetLogger().Info("update transaction status to mapping success", zap.String("tx_hash", tran.TxHash))
 
-			time.Sleep(500*time.Millisecond)
+			time.Sleep(time.Second)
 		}
 	}
 }
@@ -166,7 +166,7 @@ func RetryErrorTransaction() {
 	}()
 
 	// get created transactions
-	trans, getErr := model.GetTransactionByStatus("error")
+	trans, getErr := model.GetTransactionByStatus("error", 5)
 	if getErr != nil {
 		log.GetLogger().Error("get error transactions failed.", zap.String("error", getErr.Error()))
 		return
@@ -247,7 +247,7 @@ func RetryErrorTransaction() {
 
 			log.GetLogger().Info("update transaction status to mapping success", zap.String("tx_hash", tran.TxHash))
 
-			time.Sleep(500*time.Millisecond)
+			time.Sleep(time.Second)
 		}
 	}
 }
@@ -263,7 +263,7 @@ func CheckMappingTransaction() {
 	}()
 
 	// get mapping transactions
-	trans, getErr := model.GetTransactionByStatus("mapping")
+	trans, getErr := model.GetTransactionByStatus("mapping", 100)
 	if getErr != nil {
 		log.GetLogger().Error("get mapping transactions failed.", zap.String("error", getErr.Error()))
 		return

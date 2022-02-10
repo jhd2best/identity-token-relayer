@@ -37,9 +37,9 @@ func GetOneTransaction(hash string, address string, tokenId int64) (trans Transa
 	return
 }
 
-func GetTransactionByStatus(status string) ([]Transaction, error) {
+func GetTransactionByStatus(status string, limit int) ([]Transaction, error) {
 	transSet := make([]Transaction, 0)
-	iter := GetDbClient().Collection("transactions").Where("status", "==", status).Documents(context.Background())
+	iter := GetDbClient().Collection("transactions").Where("status", "==", status).Limit(limit).Documents(context.Background())
 	for {
 		if doc, iterErr := iter.Next(); iterErr != nil {
 			if iterErr == iterator.Done {
