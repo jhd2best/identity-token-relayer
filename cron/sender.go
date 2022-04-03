@@ -22,6 +22,7 @@ var (
 	isRetryErrorTransaction   = false
 	isCheckMappingTransaction = false
 	transOpt                  *bind.TransactOpts
+	callOpt                   *bind.CallOpts
 )
 
 func SendMappingTransaction() {
@@ -114,7 +115,7 @@ func SendMappingTransaction() {
 			}
 
 			// exec transaction on harmony
-			mappingTxHash, execErr := execOwnerUpdateOnHarmony(tran)
+			mappingTxHash, execErr := execOwnerUpdateOrInitOnHarmony(tran)
 			if execErr != nil {
 				sentry.WithScope(func(scope *sentry.Scope) {
 					scope.SetContext("data", map[string]interface{}{
@@ -211,7 +212,7 @@ func RetryErrorTransaction() {
 			}
 
 			// exec transaction on harmony
-			mappingTxHash, execErr := execOwnerUpdateOnHarmony(tran)
+			mappingTxHash, execErr := execOwnerUpdateOrInitOnHarmony(tran)
 			if execErr != nil {
 				sentry.WithScope(func(scope *sentry.Scope) {
 					scope.SetContext("data", map[string]interface{}{
@@ -287,7 +288,7 @@ func CheckMappingTransaction() {
 					})
 
 					// if exceed more than 5 mins set transaction error
-					if time.Now().Sub(tranUpdatedTime) > 5 * time.Minute {
+					if time.Now().Sub(tranUpdatedTime) > 5*time.Minute {
 						tran.RetryTimes++
 						setErr := model.SetTransactionStatusError(tran.TxHash, tran.ContractAddress, tran.TokenId, tran.RetryTimes)
 						if setErr != nil {
@@ -373,7 +374,7 @@ func CheckMappingTransaction() {
 
 					sentry.WithScope(func(scope *sentry.Scope) {
 						scope.SetContext("data", map[string]interface{}{
-							"tx_hash": tran.TxHash,
+							"tx_hash":     tran.TxHash,
 							"retry_times": tran.RetryTimes,
 						})
 						scope.SetLevel(sentry.LevelWarning)
@@ -386,7 +387,13 @@ func CheckMappingTransaction() {
 	}
 }
 
-func execOwnerUpdateOnHarmony(tran model.Transaction) (hash string, err error) {
+func execOwnerUpdateOrInitOnHarmony(tran model.Transaction) (hash string, err error) {
+	// convert params
+	newOwnerAddress := common.HexToAddress(tran.ToAddress)
+	tokenIdBig := big.NewInt(tran.TokenId)
+	ethContractAddress := common.HexToAddress(tran.ContractAddress).String()
+	ethContractAddress = strings.Replace(ethContractAddress, "0x", "", 1)
+
 	if transOpt == nil {
 		privateKey, err := crypto.HexToECDSA(hmy.GetHmyPrivateKey())
 		if err != nil {
@@ -422,16 +429,27 @@ func execOwnerUpdateOnHarmony(tran model.Transaction) (hash string, err error) {
 	}
 	transOpt.Nonce = big.NewInt(int64(nonce))
 
-	// convert params
-	ethContractAddress := common.HexToAddress(tran.ContractAddress).String()
-	ethContractAddress = strings.Replace(ethContractAddress, "0x", "", 1)
-	newOwnerAddress := common.HexToAddress(tran.ToAddress)
-	tokenIdBig := big.NewInt(tran.TokenId)
+	txHash := ""
+	_, callErr := hmy.GetOwnershipValidatorClient().OwnerOf(callOpt, ethContractAddress, tokenIdBig)
+	if callErr != nil {
+		if strings.Index(callErr.Error(), "nonexistent") >= 0 {
+			log.GetLogger().Info(tokenIdBig.String() + " token non-existent. will auto-init it")
 
-	execTrans, execErr := hmy.GetOwnershipValidatorClient().UpdateOwnership(transOpt, ethContractAddress, []common.Address{newOwnerAddress}, []*big.Int{tokenIdBig})
-	if execErr != nil {
-		return "", execErr
+			initExecTrans, execErr := hmy.GetOwnershipValidatorClient().Initialize(transOpt, ethContractAddress, []common.Address{newOwnerAddress}, []*big.Int{tokenIdBig})
+			if execErr != nil {
+				return "", execErr
+			}
+			txHash = initExecTrans.Hash().Hex()
+		} else {
+			return "", callErr
+		}
+	} else {
+		updateExecTrans, execErr := hmy.GetOwnershipValidatorClient().UpdateOwnership(transOpt, ethContractAddress, []common.Address{newOwnerAddress}, []*big.Int{tokenIdBig})
+		if execErr != nil {
+			return "", execErr
+		}
+		txHash = updateExecTrans.Hash().Hex()
 	}
 
-	return execTrans.Hash().Hex(), nil
+	return txHash, nil
 }
