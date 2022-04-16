@@ -28,14 +28,18 @@ func init() {
 
 	config = Config{
 		Debug: &DebugConfig{
-			Verbose:       false,
-			LogPath:       "",
-			DisableCron:   false,
-			DisableSentry: false,
-			SentryDSN:     "",
+			Verbose:      true,
+			LogPath:      "",
+			DisableCron:  true,
+			SentryDSN:    "",
+			PagerDutyKey: "",
 		},
 		Db: &DbConfig{
 			ServiceAccountPath: "./firebase-service-account.json",
+		},
+		RPC: &RPCConfig{
+			Listen: "127.0.0.1",
+			Port:   28888,
 		},
 		Aws: &AwsConfig{
 			Profile: "mainnet",

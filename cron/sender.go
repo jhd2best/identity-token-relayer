@@ -2,6 +2,7 @@ package cron
 
 import (
 	"context"
+	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -10,6 +11,7 @@ import (
 	. "identity-token-relayer/common"
 	"identity-token-relayer/eth"
 	"identity-token-relayer/hmy"
+	"identity-token-relayer/lib"
 	"identity-token-relayer/log"
 	"identity-token-relayer/model"
 	"math/big"
@@ -366,6 +368,13 @@ func CheckMappingTransaction() {
 								scope.SetLevel(sentry.LevelError)
 								sentry.CaptureMessage("set trans final status failed.")
 							})
+
+							// send PagerDuty incident
+							pagerSummary := fmt.Sprintf("sync transaction failed\n\ntxHash:%s\ncontract:%s\ntokenId:%d", tran.TxHash, tran.ContractAddress, tran.TokenId)
+							pagerErr := lib.NewPagerIncident("failed transaction "+tran.TxHash, "trigger", "sync transaction failed", pagerSummary, "critical")
+							if pagerErr != nil {
+								log.GetLogger().Warn("send PagerDuty incident failed.", zap.String("error", pagerErr.Error()))
+							}
 
 							log.GetLogger().Warn("set trans final status failed.", zap.String("error", setErr.Error()))
 							continue

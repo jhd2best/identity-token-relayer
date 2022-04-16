@@ -7,6 +7,8 @@ import (
 	"identity-token-relayer/cron"
 	"identity-token-relayer/log"
 	"identity-token-relayer/model"
+	"identity-token-relayer/rpc"
+	"net/http"
 	"os"
 	"os/signal"
 	"sync"
@@ -49,6 +51,10 @@ func main() {
 
 	groupWait(
 		func() {
+			rpc.Stop(ctx)
+			log.GetLogger().Info("rpc server stopped")
+		},
+		func() {
 			_ = log.GetLogger().Sync()
 		},
 		func() {
@@ -77,7 +83,7 @@ func start() {
 	log.GetLogger().Info("init firebase db success")
 
 	// init sentry
-	if !config.Get().Debug.DisableSentry {
+	if config.Get().Debug.SentryDSN != "" {
 		log.InitSentry()
 	}
 
@@ -85,6 +91,13 @@ func start() {
 	if !config.Get().Debug.DisableCron {
 		cron.InitCron()
 	}
+
+	// init rpc server
+	go func() {
+		if err := rpc.StartAndServe(); err != nil && err != http.ErrServerClosed {
+			log.GetLogger().Fatal("init rpc server failed.", zap.String("error", err.Error()))
+		}
+	}()
 
 	// sync projects
 	cron.GetEnableProject()

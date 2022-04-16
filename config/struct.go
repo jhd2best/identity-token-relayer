@@ -3,17 +3,18 @@ package config
 type Config struct {
 	Debug *DebugConfig
 	Db    *DbConfig
+	RPC   *RPCConfig
 	Aws   *AwsConfig
 	Eth   *EthConfig
 	Hmy   *HmyConfig
 }
 
 type DebugConfig struct {
-	Verbose       bool
-	LogPath       string
-	DisableCron   bool
-	DisableSentry bool
-	SentryDSN     string
+	Verbose      bool
+	LogPath      string
+	DisableCron  bool
+	SentryDSN    string
+	PagerDutyKey string
 }
 
 type DbConfig struct {
@@ -34,4 +35,9 @@ type HmyConfig struct {
 	PrivateKeyPath            string
 	OpenKMS                   bool
 	OwnershipValidatorAddress string
+}
+
+type RPCConfig struct {
+	Listen string
+	Port   uint16
 }
