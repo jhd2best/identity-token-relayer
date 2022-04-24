@@ -12,7 +12,7 @@ import (
 
 var logger *zap.Logger
 
-func init() {
+func InitLog() {
 	var err error
 
 	sentryHook := zap.Hooks(func(entry zapcore.Entry) error {

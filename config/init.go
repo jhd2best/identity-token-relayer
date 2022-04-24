@@ -7,15 +7,11 @@ import (
 
 var config Config
 
-func init() {
+func InitConfig(path string) {
 	instance := viper.New()
-
-	instance.AddConfigPath(".")
-
+	instance.SetConfigFile(path)
 	instance.SetConfigType("yaml")
-	instance.SetConfigName("config.yaml")
-
-	instance.SetEnvPrefix("itr")
+	instance.SetEnvPrefix("ITR")
 	instance.AutomaticEnv()
 	instance.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 
@@ -46,7 +42,8 @@ func init() {
 			Region:  "us-west-2",
 		},
 		Eth: &EthConfig{
-			RpcEndpoints: "https://kovan.infura.io/v3",
+			RpcEndpoints:  "https://kovan.infura.io/v3",
+			MoralisApiKey: "",
 		},
 		Hmy: &HmyConfig{
 			RpcEndpoints:              "https://api.s0.b.hmny.io",

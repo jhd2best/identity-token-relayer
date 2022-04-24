@@ -27,7 +27,8 @@ type AwsConfig struct {
 }
 
 type EthConfig struct {
-	RpcEndpoints string
+	RpcEndpoints  string
+	MoralisApiKey string
 }
 
 type HmyConfig struct {

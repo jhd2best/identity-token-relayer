@@ -18,8 +18,8 @@ import (
 )
 
 var (
-	hmyClient     *Client
-	hmyPrivateKey string
+	hmyClient                *Client
+	hmyPrivateKey            string
 	OwnershipValidatorClient *ownership_validator.OwnershipValidator
 )
 
@@ -27,18 +27,18 @@ type Client struct {
 	client *ethclient.Client
 }
 
-func init() {
+func InitClient() error {
 	// load encrypted wallet private key
 	hmyPrivateKeyRaw, err := os.ReadFile(config.Get().Hmy.PrivateKeyPath)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	if config.Get().Hmy.OpenKMS {
 		// decrypt the data
-		result, err := lib.GetKmsClient().Decrypt(&kms.DecryptInput{CiphertextBlob: hmyPrivateKeyRaw})
-		if err != nil {
-			panic(err)
+		result, decErr := lib.GetKmsClient().Decrypt(&kms.DecryptInput{CiphertextBlob: hmyPrivateKeyRaw})
+		if decErr != nil {
+			return decErr
 		}
 
 		hmyPrivateKey = string(result.Plaintext)
@@ -49,10 +49,10 @@ func init() {
 	// check private key
 	_, err = NewPrivateKey(hmyPrivateKey)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	log.GetLogger().Info("load hmy private key succeed")
+	return nil
 }
 
 func GetHmyClient() *Client {
