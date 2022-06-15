@@ -16,12 +16,16 @@ func init() {
 	toolsCmd.Flags().StringVar(&symbol, "symbol", "", "the symbol of project")
 	toolsCmd.Flags().StringVar(&baseUrl, "base_url", "", "the baseUrl of project")
 	toolsCmd.Flags().StringVar(&mode, "mode", "normal", "project init mode [normal/deep]")
+	toolsCmd.Flags().StringVar(&source, "source", "moralis", "source for getting nft owners [contract/moralis]")
+	toolsCmd.Flags().Int64Var(&tokenId, "token_id", 0, "the token id you want to get info")
+	toolsCmd.Flags().Int64Var(&indexOffset, "index_offset", 0, "the offset of token index")
 
 	rootCmd.AddCommand(toolsCmd)
 }
 
 var (
-	origin, mapping, name, symbol, baseUrl, mode string
+	origin, mapping, name, symbol, baseUrl, mode, source string
+	tokenId, indexOffset                                 int64
 
 	toolsCmd = &cobra.Command{
 		Use:   "tools",
@@ -41,7 +45,14 @@ var (
 					log.GetLogger().Fatal("init database failed.", zap.String("error", initErr.Error()))
 				}
 
-				tools.AutoImportFromChain(origin, mapping, name, symbol, baseUrl, mode)
+				tools.AutoImportFromChain(origin, mapping, name, symbol, baseUrl, mode, source, indexOffset)
+			case "get_supply":
+				if mapping == "" {
+					log.GetLogger().Fatal("mapping contract must be provided.")
+				}
+				tools.GetMappingTotalSupply(mapping)
+			case "get_owner":
+				tools.GetOriginOwner(origin, tokenId)
 			}
 		},
 	}

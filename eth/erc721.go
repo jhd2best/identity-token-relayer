@@ -1,6 +1,7 @@
 package eth
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -18,11 +19,75 @@ type NftArrayItem struct {
 	Owner string
 }
 
-func SyncOneErc721TokenOnChain(addressRaw string, tokenId int64,  syncBlockHeight int64, isLatest bool) error {
+type NftArrayItemWithHeight struct {
+	Id     int64
+	Owner  string
+	Height *big.Int
+}
+
+func GetAllErc721OwnersInOrderOnChain(addressRaw string, syncBlockHeight int64, isLatest bool, indexOffset int64) (allOwners []NftArrayItemWithHeight, err error) {
 	address := common.HexToAddress(addressRaw)
 	blockHeight := big.NewInt(syncBlockHeight)
 
-	token721Client, err := token721.NewToken721(address, GetEthClient().client)
+	token721Client, err := token721.NewToken721(address, GetEthClient().EthClient)
+	if err != nil {
+		return nil, err
+	}
+
+	callOpts := &bind.CallOpts{}
+	if !isLatest {
+		callOpts.BlockNumber = blockHeight
+	}
+
+	// get total supply
+	supplyRaw, err := token721Client.TotalSupply(callOpts)
+	if err != nil {
+		return nil, err
+	}
+	supply := int(supplyRaw.Int64())
+
+	latestHeader, err := GetEthClient().EthClient.HeaderByNumber(context.Background(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	latestHeight := latestHeader.Number
+
+	// get nft owners
+	nftOwnerSet := make([]NftArrayItemWithHeight, 0)
+	for i := 0 + indexOffset; i < int64(supply)+indexOffset; i++ {
+		owner, err := token721Client.OwnerOf(callOpts, big.NewInt(int64(i)))
+		if err != nil {
+			return nil, err
+		}
+
+		itemHeight := latestHeight
+		if !isLatest {
+			itemHeight = big.NewInt(syncBlockHeight)
+		}
+
+		nftOwnerSet = append(nftOwnerSet, NftArrayItemWithHeight{
+			Id:     i,
+			Owner:  owner.String(),
+			Height: itemHeight,
+		})
+
+		fmt.Printf("get owner %s of %d\n", owner.String(), i)
+		time.Sleep(100 * time.Millisecond)
+	}
+
+	if supply != len(nftOwnerSet) {
+		return nil, errors.New("total supply not correct")
+	}
+
+	return nftOwnerSet, nil
+}
+
+func SyncOneErc721TokenOnChain(addressRaw string, tokenId int64, syncBlockHeight int64, isLatest bool) error {
+	address := common.HexToAddress(addressRaw)
+	blockHeight := big.NewInt(syncBlockHeight)
+
+	token721Client, err := token721.NewToken721(address, GetEthClient().EthClient)
 	if err != nil {
 		return err
 	}
@@ -56,7 +121,7 @@ func SyncAllErc721TokenOnChain(addressRaw string, syncBlockHeight int64, isLates
 	address := common.HexToAddress(addressRaw)
 	blockHeight := big.NewInt(syncBlockHeight)
 
-	token721Client, err := token721.NewToken721(address, GetEthClient().client)
+	token721Client, err := token721.NewToken721(address, GetEthClient().EthClient)
 	if err != nil {
 		return err
 	}

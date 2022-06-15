@@ -10,6 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"go.uber.org/zap"
 	"identity-token-relayer/config"
+	"identity-token-relayer/eth"
 	"identity-token-relayer/hmy"
 	"identity-token-relayer/log"
 	"identity-token-relayer/model"
@@ -22,7 +23,7 @@ import (
 )
 
 const (
-	syncLimit = 500
+	syncLimit = 100
 	initLimit = 100
 )
 
@@ -31,7 +32,7 @@ var (
 	deepMode = false
 )
 
-func AutoImportFromChain(origin string, mapping string, name string, symbol string, baseUrl string, mode string) {
+func AutoImportFromChain(origin string, mapping string, name string, symbol string, baseUrl string, mode string, source string, indexOffset int64) {
 	// check params
 	if !common.IsHexAddress(origin) || !common.IsHexAddress(mapping) {
 		log.GetLogger().Fatal("origin or mapping address not valid.")
@@ -49,73 +50,94 @@ func AutoImportFromChain(origin string, mapping string, name string, symbol stri
 	}
 
 	// get all current owners
-	syncOffset := 0
-	syncCursor := ""
-	maxBlockHeight := 0
+	maxBlockHeight := int64(0)
 	totalSupply := 0
-	httpClient := http.Client{}
 	allOwners := make([]OwnerItem, 0)
-	ownerChecker := make(map[string]bool)
 
-	for {
-		requestUrl := fmt.Sprintf("https://deep-index.moralis.io/api/v2/nft/%s/owners?limit=%d&cursor=%s", originAddress, syncLimit, syncCursor)
-		req, _ := http.NewRequest(http.MethodGet, requestUrl, nil)
-		req.Header.Add("accept", "application/json")
-		req.Header.Add("X-API-Key", config.Get().Eth.MoralisApiKey)
+	if source == "moralis" {
+		syncOffset := 0
+		syncCursor := ""
+		httpClient := http.Client{}
+		ownerChecker := make(map[string]bool)
+		for {
+			requestUrl := fmt.Sprintf("https://deep-index.moralis.io/api/v2/nft/%s/owners?limit=%d&cursor=%s", originAddress, syncLimit, syncCursor)
+			req, _ := http.NewRequest(http.MethodGet, requestUrl, nil)
+			req.Header.Add("accept", "application/json")
+			req.Header.Add("X-API-Key", config.Get().Eth.MoralisApiKey)
 
-		getRes, getErr := httpClient.Do(req)
-		if getErr != nil {
-			log.GetLogger().Error(fmt.Sprintf("get current owners failed. will try again. offset: %d", syncOffset))
-			time.Sleep(3 * time.Second)
-			continue
-		}
-		resRaw, _ := ioutil.ReadAll(getRes.Body)
-
-		// parse the response
-		res := new(NftOwnerResponse)
-		unmarshalErr := json.Unmarshal(resRaw, res)
-		if unmarshalErr != nil {
-			log.GetLogger().Fatal(fmt.Sprintf("parse the response failed. stoped. offset: %d", syncOffset))
-		}
-
-		if res.Status != "SYNCED" {
-			log.GetLogger().Fatal(fmt.Sprintf("owner data not complete syncing. stoped. offset: %d page: %d", syncOffset, res.Page))
-		}
-
-		if totalSupply == 0 {
-			totalSupply = res.Total
-		}
-
-		if len(res.Result) > 0 {
-			for _, item := range res.Result {
-				itemBlockHeight, _ := strconv.Atoi(item.BlockNumber)
-				// update max block height
-				if maxBlockHeight < itemBlockHeight {
-					maxBlockHeight = itemBlockHeight
-				}
-
-				if _, ok := ownerChecker[item.TokenId]; !ok {
-					allOwners = append(allOwners, item)
-					ownerChecker[item.TokenId] = true
-				} else {
-					log.GetLogger().Error(fmt.Sprintf("found duplicate owner item. skipped. tokenId: %s", item.TokenId))
-				}
+			getRes, getErr := httpClient.Do(req)
+			if getErr != nil {
+				log.GetLogger().Error(fmt.Sprintf("get current owners failed. will try again. offset: %d", syncOffset))
+				time.Sleep(3 * time.Second)
+				continue
 			}
-			log.GetLogger().Info(fmt.Sprintf("get owner data success. %d/%d", syncOffset+len(res.Result), totalSupply))
-		} else {
-			break
+			resRaw, _ := ioutil.ReadAll(getRes.Body)
+
+			// parse the response
+			res := new(NftOwnerResponse)
+			unmarshalErr := json.Unmarshal(resRaw, res)
+			if unmarshalErr != nil {
+				log.GetLogger().Fatal(fmt.Sprintf("parse the response failed. stoped. offset: %d", syncOffset))
+			}
+
+			if res.Status != "SYNCED" {
+				log.GetLogger().Fatal(fmt.Sprintf("owner data not complete syncing. stoped. offset: %d page: %d", syncOffset, res.Page))
+			}
+
+			if totalSupply == 0 {
+				totalSupply = res.Total
+			}
+
+			if len(res.Result) > 0 {
+				for _, item := range res.Result {
+					itemBlockHeight, _ := strconv.Atoi(item.BlockNumber)
+					// update max block height
+					if maxBlockHeight < int64(itemBlockHeight) {
+						maxBlockHeight = int64(itemBlockHeight)
+					}
+
+					if _, ok := ownerChecker[item.TokenId]; !ok {
+						allOwners = append(allOwners, item)
+						ownerChecker[item.TokenId] = true
+					} else {
+						log.GetLogger().Error(fmt.Sprintf("found duplicate owner item. skipped. tokenId: %s", item.TokenId))
+					}
+				}
+				log.GetLogger().Info(fmt.Sprintf("get owner data success. %d/%d", syncOffset+len(res.Result), totalSupply))
+			} else {
+				break
+			}
+
+			_ = getRes.Body.Close()
+
+			syncOffset += len(res.Result)
+			syncCursor = res.Cursor
+			time.Sleep(2 * time.Second)
 		}
 
-		_ = getRes.Body.Close()
+		// check items count
+		if totalSupply != len(allOwners) {
+			log.GetLogger().Fatal(fmt.Sprintf("check items count failed. stoped. total: %d allCount: %d", totalSupply, len(allOwners)))
+		}
+	} else {
+		allOwnersRaw, allErr := eth.GetAllErc721OwnersInOrderOnChain(origin, 0, true, indexOffset)
+		if allErr != nil {
+			log.GetLogger().Fatal("get all ERC721 owners on chain failed.", zap.String("error", allErr.Error()))
+		}
+		maxBlockHeight = allOwnersRaw[0].Height.Int64()
+		totalSupply = len(allOwnersRaw)
 
-		syncOffset += len(res.Result)
-		syncCursor = res.Cursor
-		time.Sleep(2 * time.Second)
+		for _, item := range allOwnersRaw {
+			allOwners = append(allOwners, OwnerItem{
+				TokenId:     strconv.Itoa(int(item.Id)),
+				OwnerOf:     item.Owner,
+				BlockNumber: item.Height.String(),
+			})
+		}
 	}
 
-	// check items count
-	if totalSupply != len(allOwners) {
-		log.GetLogger().Fatal(fmt.Sprintf("check items count failed. stoped. total: %d allCount: %d", totalSupply, len(allOwners)))
+	if totalSupply == 0 || len(allOwners) == 0 {
+		log.GetLogger().Fatal("non owner found.")
 	}
 
 	// check project

@@ -11,6 +11,7 @@ import (
 	"go.uber.org/zap"
 	"identity-token-relayer/config"
 	"identity-token-relayer/contract/ownership_validator"
+	"identity-token-relayer/contract/token721"
 	"identity-token-relayer/lib"
 	"identity-token-relayer/log"
 	"math/big"
@@ -21,6 +22,7 @@ var (
 	hmyClient                *Client
 	hmyPrivateKey            string
 	OwnershipValidatorClient *ownership_validator.OwnershipValidator
+	Token721ClientSet        = make(map[string]*token721.Token721, 0)
 )
 
 type Client struct {
@@ -78,6 +80,13 @@ func GetOwnershipValidatorClient() *ownership_validator.OwnershipValidator {
 		OwnershipValidatorClient, _ = ownership_validator.NewOwnershipValidator(address, GetHmyClient().client)
 	}
 	return OwnershipValidatorClient
+}
+
+func GetToken721Client(address string) *token721.Token721 {
+	if _, ok := Token721ClientSet[address]; !ok {
+		Token721ClientSet[address], _ = token721.NewToken721(common.HexToAddress(address), GetHmyClient().client)
+	}
+	return Token721ClientSet[address]
 }
 
 func GetHmyPrivateKey() string {
